@@ -26,7 +26,11 @@ class EnhancedPredictionFramework:
         self.batch_sizes = [16, 32, 64]
         self.activations = ['relu', 'elu']
         self.dropout_rates = [0.2, 0.3]
-        self.epochs        = 50
+        self.epochs              = 50
+        self.patience            = 5
+        self.training_fraction   = 0.7
+        self.validation_fraction = 0.15
+        self.random_selection    = False
 
     def load_config(self, config_file, config_json_data):
 
@@ -72,6 +76,27 @@ class EnhancedPredictionFramework:
             print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
             sys.exit(-4)
 
+        key = "patience"
+        if key in config_json_data:
+            self.patience = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "training_fraction"
+        if key in config_json_data:
+            self.training = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "validation_fraction"
+        if key in config_json_data:
+            self.validation = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
         if "usegpu" in config_json_data:
             print("Using GPU %d" % (config_json_data["usegpu"]))
             tf.config.experimental.set_visible_devices(tf.config.list_physical_devices('GPU')[config_json_data["usegpu"]], 'GPU')
@@ -84,6 +109,12 @@ class EnhancedPredictionFramework:
                 tf.distribute.MirroredStrategy()
                 print("Mirror active")
 
+        if "gpu_mem_grow" in config_json_data:
+            if config_json_data['gpu_mem_grow']:
+                print("Setting gpu_options.allow_growth=True")
+                gpus = tf.config.experimental.list_physical_devices('GPU')
+                for gpu in gpus:
+                    tf.config.experimental.set_memory_growth(gpu, True)
 
     def preprocess_data(self, data):
         """
@@ -243,15 +274,18 @@ class EnhancedPredictionFramework:
         processed_data = self.preprocess_data(data)
         print(f"Features after preprocessing: {processed_data.columns.shape[0]}")
 
-        epochs=self.epochs
-
+        epochs               = self.epochs
+        patience             = self.patience
+        training_fraction    = self.training_fraction
+        validation_fraction  = self.validation_fraction
+        
         # Load existing results if resuming
         results_df = self.load_existing_results(experiment_type)
         results = results_df.to_dict('records') if not results_df.empty else []
 
         # Setup data splits
-        train_size = int(len(processed_data) * 0.7)
-        val_size = int(len(processed_data) * 0.15)
+        train_size = int(len(processed_data) * training_fraction)
+        val_size = int(len(processed_data) * validation_fraction)
 
         train_data = {
             'features': processed_data.iloc[:train_size].drop(['CPUTime'], axis=1),
@@ -297,10 +331,9 @@ class EnhancedPredictionFramework:
                                 dropout_rate = self.dropout_rates[dropout_idx]
 
                                 # Generate unique configuration name
-                                config_name = f"{experiment_type}_arch_{arch}_scaler_{scaler_name}_opt_{optimizer}_batch_{batch_size}_act_{activation}_drop_{dropout_rate}_epochs_{epochs}"
-                                config_name_no_special = re.sub(r'[\[\], ]+', '_', config_name )
-                                print("config_name:",config_name)
-                                print("config_name_no_special:",config_name_no_special)
+                                config_name = f"{experiment_type}_arch_{arch}_scaler_{scaler_name}_opt_{optimizer}_batch_{batch_size}_act_{activation}_drop_{dropout_rate}_training_{training_fraction}_validation_{validation_fraction}_epochs_{epochs}"
+                                ## remove special characters from config_name
+                                config_name = re.sub(r'[\[\], ]+', '_', config_name )
 
                                 try:
                                     print(f"\nTrying configuration: {config_name}")
@@ -329,7 +362,7 @@ class EnhancedPredictionFramework:
 
                                     early_stopping = tf.keras.callbacks.EarlyStopping(
                                         monitor='val_loss',
-                                        patience=5,
+                                        patience=patience,
                                         restore_best_weights=True
                                     )
 
@@ -374,7 +407,7 @@ class EnhancedPredictionFramework:
                                     )
 
                                     # Save model and scaler
-                                    self.save_model(model, scaler, config_name_no_special)
+                                    self.save_model(model, scaler, config_name)
 
                                     # Add results
                                     result = {

@@ -1,4 +1,13 @@
 #*
 *~
+<<<<<<< Updated upstream
 /.idea/
 /venv/
+=======
+config*json
+hyperparameter_architecture_analysis4.py
+*#
+.#*
+results
+test*py
+>>>>>>> Stashed changes
