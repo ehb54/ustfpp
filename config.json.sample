@@ -2,7 +2,7 @@
     "experiment_files" : {
 #        "2DSA": "./preprocess/results/filtered/2dsa-filtered.csv",
 #        "GA": "./preprocess/results/filtered/ga-filtered.csv",
-        "PCSA": "./preprocess/results/filtered/pcsa-filtered.csv"
+        "PCSA": "./preprocess/results/filtered/pcsa-filtered-randomized.csv"
     }
     ,"architectures" : [
         [64, 64]
@@ -33,7 +33,13 @@
         0.0
 #        ,0.3
     ]
-    ,"epochs" : 70
+    ,"epochs" : 100
     ,"mirroredstrategy" : false
+    ,"patience" : 100
+    ,"training_fraction" : 0.7
+    ,"validation_fraction" : 0.15
+## prevents gpu from hogging memory
+    ,"gpu_mem_grow" : true
+## select gpu to use
     ,"usegpu" : 2
 }
