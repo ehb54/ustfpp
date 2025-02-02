@@ -574,7 +574,7 @@ def main():
             # Access the parsed JSON data
             print(config_json_data)
 
-            ## perhaps the experiment_files, architectures, experiment_files should be in the framework class
+            ## perhaps the experiment_files and architectures should be in the framework class
             ##  then the subsequent blocks could be incorporated in framework.load_config()
 
             key = "experiment_files"
@@ -587,13 +587,6 @@ def main():
             key = "architectures"
             if key in config_json_data:
                 architectures = config_json_data[key]
-            else:
-                print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
-                sys.exit(-4)
-
-            key = "experiment_files"
-            if key in config_json_data:
-                experiment_files = config_json_data[key]
             else:
                 print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
                 sys.exit(-4)
