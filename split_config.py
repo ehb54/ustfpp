@@ -88,7 +88,7 @@ def main():
                                 file_name   = f'{config_name}.json'
                                 total_job_count += 1
                                 output_dir  = config_json_data['output_dir']
-                                if 'job_unique_output_dir' in args:
+                                if 'job_unique_output_dir' in args and args.job_unique_output_dir != None :
                                     output_dir = os.path.join( args.job_unique_output_dir, config_name )
                                 this_json_data = {
                                     'experiment_files'     : {
