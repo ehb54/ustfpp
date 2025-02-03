@@ -498,12 +498,6 @@ def main():
     """
     args = parse_args()
 
-    # Initialize framework with specified output directory and checkpoint file
-    framework = EnhancedPredictionFramework(
-        output_dir=args.output_dir,
-        checkpoint_file=args.checkpoint_file
-    )
-
     # Set default architectures if not specified
     if args.architectures is None:
         architectures = [
@@ -515,25 +509,6 @@ def main():
     else:
         architectures = args.architectures
 
-    # Update framework parameters if specified
-    if args.optimizers:
-        framework.optimizers = args.optimizers
-    if args.batch_sizes:
-        framework.batch_sizes = args.batch_sizes
-    if args.activations:
-        framework.activations = args.activations
-    if args.dropout_rates:
-        framework.dropout_rates = args.dropout_rates
-    if args.scalers:
-        framework.scalers = args.scalers
-
-    architectures = [
-        [64, 32],
-        [128, 64],
-        [256, 128, 64],
-        [512, 256, 128]
-    ]
-
     experiment_files = {
         '2DSA': './preprocess/results/filtered/2dsa-filtered.csv',
         'GA': './preprocess/results/filtered/ga-filtered.csv',
@@ -543,11 +518,6 @@ def main():
     # Filter experiments if specified
     if args.experiments:
         experiment_files = {k: v for k, v in experiment_files.items() if k in args.experiments}
-
-    # Check for existing checkpoint
-    checkpoint = framework.load_checkpoint() if args.resume else None
-    start_experiment = None if checkpoint is None else checkpoint['experiment_type']
-    resume = checkpoint is not None
 
     ## optionally load from config - overrides other parameters!
     if "config_file" in args:
@@ -591,10 +561,43 @@ def main():
                 print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
                 sys.exit(-4)
 
+            if "output_dir" in config_json_data:
+                args.output_dir = config_json_data['output_dir']
+                print(f'Config: output_dir is {args.output_dir}')
+
+            # Initialize framework with specified output directory and checkpoint file
+            framework = EnhancedPredictionFramework(
+                output_dir=args.output_dir,
+                checkpoint_file=args.checkpoint_file
+            )
+
             framework.load_config( config_file, config_json_data )
 
             ## disable checkpoint
             resume = False
+    else:
+        # Initialize framework with specified output directory and checkpoint file
+        framework = EnhancedPredictionFramework(
+            output_dir=args.output_dir,
+            checkpoint_file=args.checkpoint_file
+        )
+
+        # Update framework parameters if specified
+        if args.optimizers:
+            framework.optimizers = args.optimizers
+        if args.batch_sizes:
+            framework.batch_sizes = args.batch_sizes
+        if args.activations:
+            framework.activations = args.activations
+        if args.dropout_rates:
+            framework.dropout_rates = args.dropout_rates
+        if args.scalers:
+            framework.scalers = args.scalers
+    
+        # Check for existing checkpoint
+        checkpoint = framework.load_checkpoint() if args.resume else None
+        start_experiment = None if checkpoint is None else checkpoint['experiment_type']
+        resume = checkpoint is not None
 
     for exp_type, file_path in experiment_files.items():
         # Skip experiments until we reach the checkpoint

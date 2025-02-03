@@ -22,6 +22,9 @@ def parse_args():
     # trial run
     parser.add_argument( '--trial-run', action='store_true', help='do not actually run, just show what would be done' )
 
+    # job unique output base directory
+    parser.add_argument( '--job-unique-output-dir', help='create a unique directory for each run based upon the job parameters under the specified directory' )
+
     return parser.parse_args()
 
 def main():
@@ -71,6 +74,7 @@ def main():
     gpus_count = len( gpus )
     gpu_index  = 0
     cmds_for_gpus = ['' for x in range( gpus_count )];
+    total_job_count = 0
     
     for experiment_type in config_json_data['experiment_files']:
         for arch in config_json_data['architectures']:
@@ -82,6 +86,10 @@ def main():
                                 config_name = f'{experiment_type}_arch_{arch}_scaler_{scaler_name}_opt_{optimizer}_batch_{batch_size}_act_{activation}_drop_{dropout_rate}_training_{training_fraction}_validation_{validation_fraction}_epochs_{epochs}'
                                 config_name = re.sub(r'[\[\], ]+', '_', config_name )
                                 file_name   = f'{config_name}.json'
+                                total_job_count += 1
+                                output_dir  = config_json_data['output_dir']
+                                if 'job_unique_output_dir' in args and args.job_unique_output_dir != None :
+                                    output_dir = os.path.join( args.job_unique_output_dir, config_name )
                                 this_json_data = {
                                     'experiment_files'     : {
                                         f'{experiment_type}' : config_json_data['experiment_files'][experiment_type]
@@ -99,6 +107,7 @@ def main():
                                     ,'usegpu'               : gpus[gpu_index]
                                     ,'training_fraction'    : training_fraction
                                     ,'validation_fraction'  : validation_fraction
+                                    ,'output_dir'           : output_dir
                                     }
                                 cmds_for_gpus[ gpu_index ] += f'{file_name}\n'
                                 gpu_index = (gpu_index + 1 ) % gpus_count;
@@ -133,5 +142,9 @@ def main():
                 print( cmd_to_run, file=f )
                 print( f'> {run_file_name}' )
 
+
+    print ("-----------------------")
+    print(f'total jobs count {total_job_count}')
+    
 if __name__ == "__main__":
     main()
