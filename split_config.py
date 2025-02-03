@@ -81,7 +81,7 @@ def main():
                             for dropout_rate in config_json_data['dropout_rates']:
                                 config_name = f'{experiment_type}_arch_{arch}_scaler_{scaler_name}_opt_{optimizer}_batch_{batch_size}_act_{activation}_drop_{dropout_rate}_training_{training_fraction}_validation_{validation_fraction}_epochs_{epochs}'
                                 config_name = re.sub(r'[\[\], ]+', '_', config_name )
-                                file_name   = f'{config_name}.csv'
+                                file_name   = f'{config_name}.json'
                                 this_json_data = {
                                     'experiment_files'     : {
                                         f'{experiment_type}' : config_json_data['experiment_files'][experiment_type]
