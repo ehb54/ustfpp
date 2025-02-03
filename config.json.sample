@@ -38,8 +38,10 @@
     ,"patience" : 100
     ,"training_fraction" : 0.7
     ,"validation_fraction" : 0.15
-## prevents gpu from hogging memory
+## prevents tf from hogging gpu memory
     ,"gpu_mem_grow" : true
 ## select gpu to use
     ,"usegpu" : 2
+## optionally specify output_dir
+    ,"output_dir" : "some/directory"
 }
