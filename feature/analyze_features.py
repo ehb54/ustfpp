@@ -2,8 +2,10 @@ import pandas as pd
 import numpy as np
 import os
 import json
+import argparse
 from datetime import datetime
 from typing import Dict, Any, List
+from pathlib import Path
 
 class NumpyJSONEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -22,21 +24,30 @@ class NumpyJSONEncoder(json.JSONEncoder):
         return super().default(obj)
 
 class FeatureAnalysisSystem:
+    DEFAULT_CONFIG = {
+        'qual_threshold': 0.1,
+        'quant_threshold': 0.1,
+        'n_stability_iterations': 10,
+        'top_n_interactions': 10,
+        'output_format': 'both',
+        'results_dir': None
+    }
+
     def __init__(self, config: Dict[str, Any] = None):
-        self.config = {
-            'qual_threshold': 0.1,
-            'quant_threshold': 0.1,
-            'n_stability_iterations': 10,
-            'top_n_interactions': 10,
-            'output_format': 'both',
-            'results_dir': None
-        }
+        self.config = self.DEFAULT_CONFIG.copy()
         if config:
             self.config.update(config)
 
         self.orchestrators = {}
         self.results = {}
         self._setup_results_directory()
+
+    @classmethod
+    def from_json(cls, json_path: str) -> 'FeatureAnalysisSystem':
+        """Create FeatureAnalysisSystem instance from JSON config file."""
+        with open(json_path, 'r') as f:
+            config = json.load(f)
+        return cls(config)
 
     def _setup_results_directory(self):
         if not self.config['results_dir']:
@@ -68,18 +79,12 @@ class FeatureAnalysisSystem:
             print(f"\nAnalyzing {method} data from: {file_path}")
 
             try:
-                # Initialize orchestrator for each method
                 self.orchestrators[method] = FeatureAnalysisOrchestrator(file_path)
-
-                # Run analysis
                 self.results[method] = self.orchestrators[method].run_analysis(
                     qual_threshold=self.config['qual_threshold'],
                     quant_threshold=self.config['quant_threshold']
                 )
-
-                # Save method-specific results
                 self._save_results(method)
-
                 print(f"Completed analysis for {method}")
 
             except Exception as e:
@@ -110,28 +115,116 @@ class FeatureAnalysisSystem:
 
         return "\n".join(report)
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description='Feature Analysis System - Analyzes features from multiple data sources',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+    # Run with config file:
+    python analyze_features.py --config config.json
+
+    # Run with specific data directory and output format:
+    python analyze_features.py --data-dir ./data --output-format json
+
+    # Override config file settings:
+    python analyze_features.py --config config.json --qual-threshold 0.15 --results-dir ./results
+        """
+    )
+
+    parser.add_argument(
+        '--config',
+        type=str,
+        help='Path to JSON config file containing analysis parameters'
+    )
+    parser.add_argument(
+        '--data-dir',
+        type=str,
+        help='Directory containing input CSV files (default: ../preprocess/results/filtered/)'
+    )
+    parser.add_argument(
+        '--results-dir',
+        type=str,
+        help='Directory for output results (default: results/feature_analysis_<timestamp>)'
+    )
+    parser.add_argument(
+        '--qual-threshold',
+        type=float,
+        help='Threshold for qualitative feature analysis (default: 0.1)'
+    )
+    parser.add_argument(
+        '--quant-threshold',
+        type=float,
+        help='Threshold for quantitative feature analysis (default: 0.1)'
+    )
+    parser.add_argument(
+        '--output-format',
+        choices=['json', 'csv', 'both'],
+        help='Output format for results (default: both)'
+    )
+
+    return parser.parse_args()
+
+def load_config(args) -> Dict[str, Any]:
+    """Load and merge configuration from JSON file and command line arguments."""
+    config = {}
+
+    # Load from JSON file if provided
+    if args.config:
+        with open(args.config, 'r') as f:
+            config = json.load(f)
+
+    # Override with command line arguments if provided
+    if args.results_dir:
+        config['results_dir'] = args.results_dir
+    if args.qual_threshold:
+        config['qual_threshold'] = args.qual_threshold
+    if args.quant_threshold:
+        config['quant_threshold'] = args.quant_threshold
+    if args.output_format:
+        config['output_format'] = args.output_format
+
+    return config
+
+def get_data_files(data_dir: str) -> Dict[str, str]:
+    """Get data files from the specified directory."""
+    if not data_dir:
+        return {
+            '2DSA': '../preprocess/results/filtered/2dsa-filtered.csv',
+            'GA': '../preprocess/results/filtered/ga-filtered.csv',
+            'PCSA': '../preprocess/results/filtered/pcsa-filtered.csv'
+        }
+
+    data_files = {}
+    data_dir_path = Path(data_dir)
+
+    if not data_dir_path.exists():
+        raise ValueError(f"Data directory does not exist: {data_dir}")
+
+    for file_path in data_dir_path.glob('*.csv'):
+        method = file_path.stem.split('-')[0].upper()
+        data_files[method] = str(file_path)
+
+    return data_files
+
 def main():
-    config = {
-        'qual_threshold': 0.15,
-        'quant_threshold': 0.15,
-        'n_stability_iterations': 20,
-        'top_n_interactions': 15,
-        'output_format': 'both',
-        'results_dir': 'results/feature_analysis'
-    }
+    # Parse command line arguments
+    args = parse_args()
 
-    # Initialize system
-    analysis_system = FeatureAnalysisSystem(config)
-
-    # Define data files for each method
-    data_files = {
-        '2DSA': '../preprocess/results/filtered/2dsa-filtered.csv',
-        'GA': '../preprocess/results/filtered/ga-filtered.csv',
-        'PCSA': '../preprocess/results//filtered/pcsa-filtered.csv'
-    }
+    # Load configuration
+    config = load_config(args)
 
     try:
-        # Run analysis for all methods
+        # Initialize system
+        analysis_system = FeatureAnalysisSystem(config)
+
+        # Get data files
+        data_files = get_data_files(args.data_dir)
+
+        if not data_files:
+            raise ValueError("No data files found for analysis")
+
+        # Run analysis
         results = analysis_system.run_analysis(data_files)
 
         # Print summary report
@@ -140,6 +233,7 @@ def main():
 
     except Exception as e:
         print(f"Analysis failed: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     main()
