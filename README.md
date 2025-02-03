@@ -45,12 +45,6 @@ This repository provides tools for preprocessing data, training models, and eval
 
 ## **Usage**
 
-### **Running the Model**
-Execute the primary model script:
-```bash
-python run_model.py --config config.json
-```
-
 ### **Hyperparameter Analysis**
 Optimize model architectures:
 ```bash
