@@ -7,6 +7,9 @@ import os
 import json
 import pickle
 import matplotlib.pyplot as plt
+import sys
+import argparse
+import re
 
 class EnhancedPredictionFramework:
     def __init__(self, output_dir='results/prediction', checkpoint_file=None):
@@ -23,6 +26,95 @@ class EnhancedPredictionFramework:
         self.batch_sizes = [16, 32, 64]
         self.activations = ['relu', 'elu']
         self.dropout_rates = [0.2, 0.3]
+        self.epochs              = 50
+        self.patience            = 5
+        self.training_fraction   = 0.7
+        self.validation_fraction = 0.15
+        self.random_selection    = False
+
+    def load_config(self, config_file, config_json_data):
+
+        key = "scalers"
+        if key in config_json_data:
+            self.scalers = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "optimizers"
+        if key in config_json_data:
+            self.optimizers = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "batch_sizes"
+        if key in config_json_data:
+            self.batch_sizes = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "activations"
+        if key in config_json_data:
+            self.activations = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "dropout_rates"
+        if key in config_json_data:
+            self.dropout_rates = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "epochs"
+        if key in config_json_data:
+            self.epochs = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "patience"
+        if key in config_json_data:
+            self.patience = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "training_fraction"
+        if key in config_json_data:
+            self.training = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        key = "validation_fraction"
+        if key in config_json_data:
+            self.validation = config_json_data[key]
+        else:
+            print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+            sys.exit(-4)
+
+        if "usegpu" in config_json_data:
+            print("Using GPU %d" % (config_json_data["usegpu"]))
+            tf.config.experimental.set_visible_devices(tf.config.list_physical_devices('GPU')[config_json_data["usegpu"]], 'GPU')
+
+        if "mirroredstrategy" in config_json_data:
+            if config_json_data['mirroredstrategy']:
+                if "usegpu" in config_json_data:
+                    print("config json options 'usegpu' and 'mirroredstrategy' are mutually exclusive", file=sys.stderr)
+                    sys.exit(-4)
+                tf.distribute.MirroredStrategy()
+                print("Mirror active")
+
+        if "gpu_mem_grow" in config_json_data:
+            if config_json_data['gpu_mem_grow']:
+                print("Setting gpu_options.allow_growth=True")
+                gpus = tf.config.experimental.list_physical_devices('GPU')
+                for gpu in gpus:
+                    tf.config.experimental.set_memory_growth(gpu, True)
 
     def preprocess_data(self, data):
         """
@@ -42,7 +134,8 @@ class EnhancedPredictionFramework:
         Create a neural network model with the specified architecture
         """
         model = tf.keras.Sequential()
-        model.add(tf.keras.layers.InputLayer(input_shape=(input_dim,)))
+        ## warning said input_shape should be replaced with shape
+        model.add(tf.keras.layers.InputLayer(shape=(input_dim,)))
 
         for units in architecture:
             model.add(tf.keras.layers.Dense(units, activation=activation))
@@ -177,17 +270,22 @@ class EnhancedPredictionFramework:
         # Print confirmation message
         print(f"Loss curve saved: {plot_filename}")
 
-    def run_grid_search(self, data, architectures, experiment_type, resume=False):
+    def run_grid_search(self, data, architectures, experiment_type, resume=False, trial_run=False):
         processed_data = self.preprocess_data(data)
         print(f"Features after preprocessing: {processed_data.columns.shape[0]}")
 
+        epochs               = self.epochs
+        patience             = self.patience
+        training_fraction    = self.training_fraction
+        validation_fraction  = self.validation_fraction
+        
         # Load existing results if resuming
         results_df = self.load_existing_results(experiment_type)
         results = results_df.to_dict('records') if not results_df.empty else []
 
         # Setup data splits
-        train_size = int(len(processed_data) * 0.7)
-        val_size = int(len(processed_data) * 0.15)
+        train_size = int(len(processed_data) * training_fraction)
+        val_size = int(len(processed_data) * validation_fraction)
 
         train_data = {
             'features': processed_data.iloc[:train_size].drop(['CPUTime'], axis=1),
@@ -233,10 +331,16 @@ class EnhancedPredictionFramework:
                                 dropout_rate = self.dropout_rates[dropout_idx]
 
                                 # Generate unique configuration name
-                                config_name = f"{experiment_type}_arch{arch_idx}_scaler{scaler_name}_opt{optimizer}_batch{batch_size}_act{activation}_drop{dropout_rate}"
+                                config_name = f"{experiment_type}_arch_{arch}_scaler_{scaler_name}_opt_{optimizer}_batch_{batch_size}_act_{activation}_drop_{dropout_rate}_training_{training_fraction}_validation_{validation_fraction}_epochs_{epochs}"
+                                ## remove special characters from config_name
+                                config_name = re.sub(r'[\[\], ]+', '_', config_name )
 
                                 try:
                                     print(f"\nTrying configuration: {config_name}")
+
+                                    if trial_run:
+                                        print("trial run, no model made\n")
+                                        break
 
                                     scaler = self.get_scaler(scaler_name)
                                     X_train_scaled = scaler.fit_transform(train_data['features'])
@@ -258,14 +362,14 @@ class EnhancedPredictionFramework:
 
                                     early_stopping = tf.keras.callbacks.EarlyStopping(
                                         monitor='val_loss',
-                                        patience=5,
+                                        patience=patience,
                                         restore_best_weights=True
                                     )
 
                                     history = model.fit(
                                         X_train_scaled, train_data['target'],
                                         validation_data=(X_val_scaled, val_data['target']),
-                                        epochs=1500,
+                                        epochs=epochs,
                                         batch_size=batch_size,
                                         verbose=0,
                                         callbacks=[early_stopping]
@@ -379,6 +483,12 @@ def parse_args():
     parser.add_argument('--resume', action='store_true',
                         help='Resume from last checkpoint')
 
+    # config file
+    parser.add_argument( '--config-file', help='read options from JSON formatted configuration file' )
+
+    # trial run
+    parser.add_argument( '--trial-run', action='store_true', help='do not actually run' )
+
     return parser.parse_args()
 
 
@@ -439,6 +549,53 @@ def main():
     start_experiment = None if checkpoint is None else checkpoint['experiment_type']
     resume = checkpoint is not None
 
+    ## optionally load from config - overrides other parameters!
+    if "config_file" in args:
+        config_file = args.config_file
+        print("Loading from config file %s\n" % (config_file))
+        if not os.path.isfile( config_file ) :
+            print("Error: file %s not found\n" % (config_file), file=sys.stderr)
+            sys.exit(-2)
+        with open(config_file, 'r') as f:
+            ## strip out comment lines
+            lines = '';
+            for line in f:
+                line = line.strip()
+                if not line.startswith('#'):
+                    lines += line
+
+            ## convert json string to dictionary
+            try:
+                config_json_data = json.loads(lines)
+            except json.JSONDecodeError as e:
+                print("Error decoding JSON:", e, file=sys.stderr)
+                print("json:\n", lines )
+                sys.exit(-3)
+            # Access the parsed JSON data
+            print(config_json_data)
+
+            ## perhaps the experiment_files and architectures should be in the framework class
+            ##  then the subsequent blocks could be incorporated in framework.load_config()
+
+            key = "experiment_files"
+            if key in config_json_data:
+                experiment_files = config_json_data[key]
+            else:
+                print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+                sys.exit(-4)
+
+            key = "architectures"
+            if key in config_json_data:
+                architectures = config_json_data[key]
+            else:
+                print("File %s missing required key %s" % (config_file,key), file=sys.stderr)
+                sys.exit(-4)
+
+            framework.load_config( config_file, config_json_data )
+
+            ## disable checkpoint
+            resume = False
+
     for exp_type, file_path in experiment_files.items():
         # Skip experiments until we reach the checkpoint
         if resume and start_experiment and exp_type != start_experiment:
@@ -447,7 +604,7 @@ def main():
         print(f"\nProcessing {exp_type} experiments...")
         data = pd.read_csv(file_path)
 
-        results = framework.run_grid_search(data, architectures, exp_type, resume=resume)
+        results = framework.run_grid_search(data, architectures, exp_type, resume, args.trial_run)
         results['experiment_type'] = exp_type
 
         # After first experiment, we're caught up to the checkpoint
