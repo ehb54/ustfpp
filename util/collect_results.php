@@ -4,20 +4,26 @@
 {};
 
 $self = __FILE__;
+$selfdir = dirname( $self );
 
 require "utility.php";
 
 $notes = <<<__EOD
-  usage: $self {options}
+  usage: $self {options} --file csvfile --outdir directory
 
 collects results into directory 
+
+Required
+
+--file   csvfile               : summary csv file (required)
+--outdir directory             : output directory (required, must not previously exist)
 
 Options
 
 --help                         : print this information and exit
---file   csvfile               : summary csv file (required)
---outdir directory             : output directory (required, must not previously exist)
 --targz                        : create directory.tar.gz (optional)
+--add-range-summary            : add range summary data
+
 
 __EOD;
 
@@ -53,6 +59,12 @@ while( count( $u_argv ) && substr( $u_argv[ 0 ], 0, 1 ) == "-" ) {
         case "--targz": {
             array_shift( $u_argv );
             $targz = true;
+            break;
+        }
+
+        case "--add-range-summary": {
+            array_shift( $u_argv );
+            $add_range_summary = true;
             break;
         }
 
@@ -145,8 +157,13 @@ foreach ( $keepdata as $v ) {
     } else {
         $cmd = "find . -type f -name \"$bestname*\"";
         print "$cmd\n";
-        $files = implode( ' ', explode( "\n", `$cmd` ) );
+        $files_array = explode( "\n", `$cmd` );
+        $files = implode( ' ', $files_array  );
         $cmd = "ln $files $dd";
+        if ( isset( $add_range_summary ) ) {
+            $completes = array_values( preg_grep( '/complete_error_analysis.csv$/', $files_array ) );
+            $cmd .= " && $selfdir/analyze_results.php --outfile $dd/${bestname}_range_summary.csv --file " . implode( ' --file ', $completes );
+        }                                       
     }
     echoline();
     print "$cmd\n";
