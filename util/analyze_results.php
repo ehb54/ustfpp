@@ -103,7 +103,7 @@ foreach ( $files as $file ) {
         ,[ 0, 60 * 60 * 2 ] # 0 to 2h
         ,[ 0, 60 * 60 * 4 ] # 0 to 4h
         ,[ 60 * 60 * 2, 1e99 ] # 2h to max
-        ,[ 60 * 60 * 4, 1e99 ] # 2h to max
+        ,[ 60 * 60 * 4, 1e99 ] # 4h to max
         ,[ 60 * 60 * 8, 1e99 ] # 8h to max
         ];
 

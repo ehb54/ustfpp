@@ -173,12 +173,13 @@ $sumobj = (object)[];
 
 foreach ( $features as $feature_col => $feature ) {
     $sumobj->{$feature} = (object)[];
-    $sumobj->{$feature}->key = $feature_col;
-    $sumobj->{$feature}->min   = 1e99;
-    $sumobj->{$feature}->max   = -1e99;
-    $sumobj->{$feature}->sum   = 0;
-    $sumobj->{$feature}->sum2  = 0;
-    $sumobj->{$feature}->data  = [];
+    $sumobj->{$feature}->key     = $feature_col;
+    $sumobj->{$feature}->feature = "feature_$feature";
+    $sumobj->{$feature}->min     = 1e99;
+    $sumobj->{$feature}->max     = -1e99;
+    $sumobj->{$feature}->sum     = 0;
+    $sumobj->{$feature}->sum2    = 0;
+    $sumobj->{$feature}->data    = [];
 }
 
 ## pass thru data, collect sum, sum2, min, max
