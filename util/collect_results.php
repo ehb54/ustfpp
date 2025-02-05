@@ -13,6 +13,8 @@ $notes = <<<__EOD
 
 collects results into directory 
 
+N.B. --outdir should be outside of the results tree!
+
 Required
 
 --file   csvfile               : summary csv file (required)
@@ -23,7 +25,7 @@ Options
 --help                         : print this information and exit
 --targz                        : create directory.tar.gz (optional)
 --add-range-summary            : add range summary data
-
+--add-z-score-analysis file    : add z-score summary csv, file is json config file produced by find_outliers.php run on the original dataset
 
 __EOD;
 
@@ -68,6 +70,15 @@ while( count( $u_argv ) && substr( $u_argv[ 0 ], 0, 1 ) == "-" ) {
             break;
         }
 
+        case "--add-z-score-analysis": {
+            array_shift( $u_argv );
+            if ( !count( $u_argv ) ) {
+                error_exit( "ERROR: option '$arg' requires an argument\n$notes" );
+            }
+            $add_z_score_analysis = array_shift( $u_argv );
+            break;
+        }
+
       default:
         error_exit( "\nUnknown option '$u_argv[0]'\n\n$notes" );
     }        
@@ -104,6 +115,22 @@ if ( !mkdir( $outdir ) ) {
 
 if ( !is_dir( $outdir ) ) {
     error_exit( "$outdir is not a directory after making this directory" );
+}
+
+if ( !is_dir( 'models' ) ) {
+    error_exit( "no 'models' sub-directory found, must be run from a results directory?" );
+}
+    
+if ( !is_dir( 'error_analysis' ) ) {
+    error_exit( "no 'error_analysis' sub-directory found, must be run from a results directory?" );
+}
+    
+if ( !is_dir( 'loss_curves' ) ) {
+    error_exit( "no 'loss_curves' sub-directory found, must be run from a results directory?" );
+}
+
+if ( substr( $outdir, 0, 3 ) != '../' ) {
+    echo "WARNING: --outdir '$outdir' must be outside of the results directory\n";
 }
 
 $lines = explode( "\n", $file_contents );
@@ -159,10 +186,14 @@ foreach ( $keepdata as $v ) {
         print "$cmd\n";
         $files_array = explode( "\n", `$cmd` );
         $files = implode( ' ', $files_array  );
-        $cmd = "ln $files $dd";
+        $cmd = "ln models/$bestname/* $files $dd";
         if ( isset( $add_range_summary ) ) {
             $completes = array_values( preg_grep( '/complete_error_analysis.csv$/', $files_array ) );
             $cmd .= " && $selfdir/analyze_results.php --outfile $dd/${bestname}_range_summary.csv --file " . implode( ' --file ', $completes );
+        }                                       
+        if ( isset( $add_z_score_analysis ) ) {
+            $completes = array_values( preg_grep( '/complete_error_analysis.csv$/', $files_array ) );
+            $cmd .= " && $selfdir/check_outliers.php --config $add_z_score_analysis --z-score-range 2 3 .02 --only-accepted-max-error --error-analysis-file " . implode( ' --error-analysis-file ', $completes ) . " 2>&1 > ${bestname}_z_score.csv";
         }                                       
     }
     echoline();
