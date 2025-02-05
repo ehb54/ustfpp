@@ -1,23 +1,17 @@
 # Comprehensive Guide to Data Preprocessing Configuration
 
-## Overview
-
-The `explain_config.json` is a configuration file designed to control the preprocessing of CSV datasets, specifically
-for computational workflow data cleaning. It provides a flexible and detailed way to specify how input data should be
-processed.
-
 ## File Structure Breakdown
 
 ### 1. Input Files Section
 
 ```json
 "input_files": {
-"source_directory": "./results",
-"file_patterns": [
-"2dsa-dataset.csv",
-"ga-dataset.csv",
-"pcsa-dataset.csv"
-],
+    "source_directory": "./results",
+    "file_patterns": [
+    "2dsa-dataset.csv",
+    "ga-dataset.csv",
+    "pcsa-dataset.csv"
+  ],
 "file_type": "csv"
 }
 ```
@@ -31,10 +25,10 @@ processed.
 
 ```json
 "output_files": {
-"directory": "./results/filtered",
-"prefix": "filtered_",
-"suffix": ".csv",
-"metrics_file": "preprocessing_metrics.csv"
+    "directory": "./results/filtered",
+    "prefix": "filtered_",
+    "suffix": ".csv",
+    "metrics_file": "preprocessing_metrics.csv"
 }
 ```
 
@@ -48,14 +42,14 @@ processed.
 
 ```json
 "column_configuration": {
-"keep_columns": [...],
-"drop_columns": [...],
-"transformations": {
-"rename_columns": {
-...
-}
-}
-}
+    "keep_columns": [...],
+    "drop_columns": [...],
+    "transformations": {
+      "rename_columns": {
+      ...
+      }
+    }
+  }
 ```
 
 - **Purpose**: Controls column selection and transformations
@@ -67,9 +61,9 @@ processed.
 
 ```json
 "negative_value_handling": {
-"mode": "replace",
-"replace_value": 0,
-"columns": [...]
+  "mode": "replace",
+  "replace_value": 0,
+  "columns": [...]
 }
 ```
 
@@ -98,8 +92,8 @@ processed.
 
 ```json
 "logging": {
-"log_level": "INFO",
-"log_file": "2dsa_preprocessing.log"
+  "log_level": "INFO",
+  "log_file": "2dsa_preprocessing.log"
 }
 ```
 
@@ -124,65 +118,8 @@ processed.
 - `remove`: Boolean to enable/disable removal of uniform columns
 - `threshold`: Number of unique values to consider a column non-uniform (default is 1)
 
-### 8. Metadata Section
-
-```json
-"_metadata": {
-"version": "1.0",
-"last_updated": "2025-02-04",
-"preprocessing_purpose": "Computational workflow data cleaning"
-}
-```
-
 - **Purpose**: Provides context and version information about the configuration
 
-## Key Features of the Preprocessing Workflow
-
-1. **Flexible Column Management**
-    - Selective column keeping/dropping
-    - Column renaming
-    - Handling of negative values
-    - Filtering based on value ranges
-
-2. **Robust Logging**
-    - Configurable log levels
-    - Detailed tracking of preprocessing steps
-
-3. **Metrics Generation**
-    - Tracks initial and final dataset characteristics
-    - Generates a metrics CSV for further analysis
-
-## Example Use Cases
-
-- Data cleaning for scientific computational workflows
-- Preparing datasets for machine learning
-- Removing outliers and invalid data points
-- Standardizing column names and data types
-
-## Recommended Workflow
-
-1. **Configuration Preparation**
-    - Carefully define your input and output requirements
-    - Specify columns to keep or drop
-    - Set up appropriate value filters
-    - Configure logging level
-
-2. **Preprocessing Steps**
-    - Use the `--dry-run` option to validate configuration
-    - Review input files and configuration
-    - Process files with appropriate parameters
-
-3. **Post-Processing Analysis**
-    - Examine the generated metrics file
-    - Verify data transformations
-    - Validate preprocessing outcomes
-
-## Best Practices
-
-- Always validate your configuration before batch processing
-- Use the `--dry-run` option to check configuration without processing
-- Review the generated metrics file to understand data transformations
-- Start with conservative filters and gradually refine
 
 ## Potential Configurations
 
@@ -222,9 +159,3 @@ processed.
     3. Value constraints
     4. Logging output
 - Use verbose logging (`DEBUG` level) for detailed diagnostics
-
-## Conclusion
-
-The configuration provides a powerful, flexible approach to data preprocessing that can be easily adapted to various
-datasets and preprocessing requirements. Careful configuration and validation are key to successful data cleaning and
-preparation.
