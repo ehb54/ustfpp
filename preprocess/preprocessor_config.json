@@ -1,0 +1,26 @@
+{
+    "input_files": {
+        "source_directory": "./results",
+        "file_patterns": [
+            "2dsa-dataset.csv"
+        ],
+        "file_type": "csv"
+    },
+    "output_files": {
+        "directory": "./results/filtered/transformed",
+        "prefix": "filtered_",
+        "suffix": ".csv",
+        "metrics_file": "preprocessing_metrics.csv"
+    },
+    "uniform_columns": {
+        "remove": true,
+        "threshold": 1
+    },
+    "negative_value_handling": {
+        "mode": "all_columns"
+    },
+    "logging": {
+        "log_level": "INFO",
+        "log_file": "2dsa_preprocessing.log"
+    }
+}
