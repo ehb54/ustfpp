@@ -1,0 +1,89 @@
+{
+    "input_files": {
+        "source_directory": "./results",
+        "file_patterns": [
+            "2dsa-dataset.csv",
+            "ga-dataset.csv",
+            "pcsa-dataset.csv"
+        ],
+        "file_type": "csv"
+    },
+
+    "output_files": {
+        "directory": "./results/filtered",
+        "prefix": "filtered_",
+        "suffix": ".csv",
+        "metrics_file": "preprocessing_metrics.csv"
+    },
+
+    "column_configuration": {
+        "keep_columns": [
+            "CPUCount",
+            "CPUTime",
+            "wallTime",
+            "max_rss",
+            "job.jobParameters.ff0_max.@attributes.value",
+            "job.jobParameters.ff0_min.@attributes.value",
+            "job.jobParameters.s_max.@attributes.value",
+            "job.jobParameters.s_min.@attributes.value"
+        ],
+        "drop_columns": [
+            "job.cluster.@attributes.name",
+            "edited_radial_points.0",
+            "edited_scans.0",
+            "simpoints.0"
+        ],
+        "transformations": {
+            "rename_columns": {
+                "CPUCount": "cpu_count",
+                "CPUTime": "cpu_time",
+                "max_rss": "max_memory_usage",
+                "job.jobParameters.ff0_max.@attributes.value": "ff0_max",
+                "job.jobParameters.ff0_min.@attributes.value": "ff0_min",
+                "job.jobParameters.s_max.@attributes.value": "s_max",
+                "job.jobParameters.s_min.@attributes.value": "s_min"
+            }
+        }
+    },
+
+    "negative_value_handling": {
+        "mode": "replace",
+        "replace_value": 0,
+        "columns": [
+            "CPUTime",
+            "max_rss",
+            "job.jobParameters.ff0_max.@attributes.value",
+            "job.jobParameters.ff0_min.@attributes.value",
+            "job.jobParameters.s_max.@attributes.value",
+            "job.jobParameters.s_min.@attributes.value"
+        ]
+    },
+
+    "additional_filters": {
+        "min_value_filters": {
+            "CPUCount": 1,
+            "CPUTime": 0,
+            "max_rss": 0,
+            "job.jobParameters.ff0_max.@attributes.value": 0,
+            "job.jobParameters.s_max.@attributes.value": 0
+        },
+        "max_value_filters": {
+            "CPUCount": 128,
+            "CPUTime": 86400,
+            "max_rss": 134217728,
+            "job.jobParameters.ff0_max.@attributes.value": 1000,
+            "job.jobParameters.s_max.@attributes.value": 1000
+        }
+    },
+
+    "logging": {
+        "log_level": "INFO",
+        "log_file": "2dsa_preprocessing.log"
+    },
+
+    "_metadata": {
+        "version": "1.0",
+        "last_updated": "2025-02-04",
+        "preprocessing_purpose": "Computational workflow data cleaning"
+    }
+}
