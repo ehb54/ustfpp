@@ -12,14 +12,27 @@ def load_model(model_path):
     """Load the TensorFlow model from specified path."""
     print(f"\nAttempting to load model from: {model_path}")
     print(f"Path exists: {os.path.exists(model_path)}")
+
+    # If path is a directory, look for model files
     if os.path.isdir(model_path):
         print(f"Directory contents: {os.listdir(model_path)}")
 
-        # Check if there's a nested 'model' directory
+        # Check for nested 'model' directory
         model_subdir = os.path.join(model_path, 'model')
         if os.path.exists(model_subdir):
             print(f"\nFound nested model directory. Contents: {os.listdir(model_subdir)}")
             model_path = model_subdir
+
+        # Check for .keras file first (Keras 3 native format)
+        keras_file = os.path.join(model_path, 'model.keras')
+        if os.path.exists(keras_file):
+            model_path = keras_file
+            print(f"\nFound .keras file, attempting to load: {model_path}")
+
+        # Check for .h5 file if no .keras file
+        elif os.path.exists(os.path.join(model_path, 'model.h5')):
+            model_path = os.path.join(model_path, 'model.h5')
+            print(f"\nFound .h5 file, attempting to load: {model_path}")
 
     try:
         # First try loading as TensorFlow SavedModel using TFSMLayer
@@ -56,6 +69,7 @@ def load_model(model_path):
                 except Exception as e2:
                     print(f"Failed alternate endpoint approach with error: {e2}")
 
+        # Try direct model loading
         print("\nAttempting to load with tf.keras.models.load_model...")
         try:
             model = tf.keras.models.load_model(model_path, compile=False)
@@ -72,11 +86,10 @@ def load_model(model_path):
         print("1. For SavedModel format in Keras 3: The model must be loaded using TFSMLayer")
         print("2. For Keras 3: Native format should use .keras extension")
         print("3. For legacy H5 format: Use .h5 extension")
-        print(f"4. Check if model is in subdirectory: {os.path.join(model_path, 'model')}")
+        print("4. Check if model is in subdirectory: {os.path.join(model_path, 'model')}")
         print("\nTensorFlow version:", tf.__version__)
         print("Keras version:", tf.keras.__version__)
         sys.exit(1)
-
 def load_data(data_path, model_dir=None):
     """Load and preprocess data from CSV."""
     print(f"\nAttempting to load data from: {data_path}")
@@ -104,15 +117,74 @@ def load_data(data_path, model_dir=None):
 def generate_predictions(model, data, scaler):
     """Generate predictions for input data."""
     try:
-        # Get feature columns (all columns available)
-        X = data.values
+        # Create a copy of the data for preprocessing
+        processed_data = data.copy()
 
-        # Apply scaler if it exists
+        # Clean wallTime column - extract numeric value before tab
+        if 'wallTime' in processed_data.columns:
+            processed_data['wallTime'] = processed_data['wallTime'].str.split('\t').str[0].astype(float)
+
+        # Identify numeric columns excluding specific features and target
+        exclude_columns = ['max_rss', 'wallTime', 'CPUTime']  # Added CPUTime to exclusions
+        numeric_columns = processed_data.select_dtypes(include=[np.number]).columns.tolist()
+
+        # Before exclusion
+        print("\nBefore exclusion:")
+        print(f"Number of numeric columns: {len(numeric_columns)}")
+        print("Numeric columns:")
+        for col in sorted(numeric_columns):
+            print(f"- {col}")
+
+        # After exclusion
+        feature_columns = [col for col in numeric_columns if col not in exclude_columns]
+        feature_columns = sorted(feature_columns)
+
+        print(f"\nAfter excluding {exclude_columns}:")
+        print(f"Number of features: {len(feature_columns)}")
+        print("Feature columns:")
+        for col in feature_columns:
+            print(f"- {col}")
+
+        # Scaler features
         if scaler is not None:
-            print("\nApplying scaler transformation to input features...")
+            scaler_features = sorted(scaler.feature_names_in_.tolist())
+            print(f"\nScaler expects {len(scaler_features)} features:")
+            for feat in scaler_features:
+                print(f"- {feat}")
+
+            # Find differences
+            current_set = set(feature_columns)
+            scaler_set = set(scaler_features)
+
+            extra = current_set - scaler_set
+            missing = scaler_set - current_set
+
+            if extra:
+                print("\nExtra features in current data:")
+                for feat in sorted(extra):
+                    print(f"- {feat}")
+
+            if missing:
+                print("\nMissing features (expected by scaler):")
+                for feat in sorted(missing):
+                    print(f"- {feat}")
+
+            if extra or missing:
+                raise ValueError(f"Feature mismatch: scaler expects {len(scaler_features)} features, got {len(feature_columns)}")
+
+        # Get feature matrix
+        X = processed_data[feature_columns].values
+        print(f"\nInput shape: {X.shape}")
+
+        # Apply scaler
+        if scaler is not None:
+            print("\nApplying scaler transformation...")
             X = scaler.transform(X)
 
+        # Generate predictions
+        print("\nGenerating predictions...")
         y_pred = model.predict(X)
+
         # Handle different shapes of predictions
         if len(y_pred.shape) > 1 and y_pred.shape[1] == 1:
             y_pred = y_pred.flatten()
@@ -124,18 +196,23 @@ def generate_predictions(model, data, scaler):
         # Prepare summary statistics
         summary_stats = {
             'total_records': len(y_pred),
-            'min_predicted': np.min(y_pred),
-            'max_predicted': np.max(y_pred),
-            'mean_predicted': np.mean(y_pred),
-            'median_predicted': np.median(y_pred),
-            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            'min_predicted': float(np.min(y_pred)),
+            'max_predicted': float(np.max(y_pred)),
+            'mean_predicted': float(np.mean(y_pred)),
+            'median_predicted': float(np.median(y_pred)),
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'features_used': feature_columns
         }
 
         return results_df, summary_stats
-    except Exception as e:
-        print(f"Error generating predictions: {e}")
-        sys.exit(1)
 
+    except Exception as e:
+        print(f"\nError generating predictions: {e}")
+        print("\nDebugging information:")
+        print(f"Data types of columns:\n{data.dtypes}")
+        print("\nFirst few rows of data:")
+        print(data.head())
+        raise
 def save_results(results_df, summary_stats, output_dir, run_name):
     """Save detailed results and summary statistics to CSV files."""
     try:
