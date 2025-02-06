@@ -280,8 +280,11 @@ class EnhancedPredictionFramework:
         validation_fraction  = self.validation_fraction
         
         # Load existing results if resuming
-        results_df = self.load_existing_results(experiment_type)
-        results = results_df.to_dict('records') if not results_df.empty else []
+        # results_df = self.load_existing_results(experiment_type)
+        # results = results_df.to_dict('records') if not results_df.empty else []
+        # parallel results clobbered, just clear and append
+        # not file should be emptied before run
+        results = []
 
         # Setup data splits
         train_size = int(len(processed_data) * training_fraction)
@@ -435,7 +438,8 @@ class EnhancedPredictionFramework:
                                     # Save results after each successful run
                                     pd.DataFrame(results).to_csv(
                                         os.path.join(self.output_dir, f'{experiment_type.lower()}_grid_search_results.csv'),
-                                        index=False
+                                        index=False,
+                                        mode='a'
                                     )
 
                                     print(f"Configuration completed. Test MAE: {test_analysis['mean_error']:.4f}")
