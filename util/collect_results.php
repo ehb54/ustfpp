@@ -101,6 +101,10 @@ if ( !file_exists( $file ) ) {
     error_exit( "$file does not exist" );
 }
 
+if ( isset( $add_z_score_analysis ) && !file_exists( $add_z_score_analysis ) ) {
+    error_exit( "$add_z_score_analysis does not exist" );
+}
+
 if ( false === ( $file_contents = file_get_contents( $file ) ) ) {
     error_exit( "error reading $file" );
 }
@@ -193,7 +197,7 @@ foreach ( $keepdata as $v ) {
         }                                       
         if ( isset( $add_z_score_analysis ) ) {
             $completes = array_values( preg_grep( '/complete_error_analysis.csv$/', $files_array ) );
-            $cmd .= " && $selfdir/check_outliers.php --config $add_z_score_analysis --z-score-range 2 3 .02 --only-accepted-max-error --error-analysis-file " . implode( ' --error-analysis-file ', $completes ) . " 2>&1 > ${bestname}_z_score.csv";
+            $cmd .= " && $selfdir/check_outliers.php --config $add_z_score_analysis --z-score-range 2 3.01 .02 --only-accepted-max-error --error-analysis-file " . implode( ' --error-analysis-file ', $completes ) . " 2>&1 > $dd/${bestname}_z_score.csv";
         }                                       
     }
     echoline();
