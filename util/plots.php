@@ -84,9 +84,9 @@ foreach ( $expected_data as $v ) {
 }
         
 $expected_zscore = "_z_score.csv";
-$file = "$name$expected_zscore";
-if ( !file_exists( $file ) ) {
-    error_exit( "expected data file $file does not exist" );
+$zscore_file = "$name$expected_zscore";
+if ( !file_exists( $zscore_file ) ) {
+    error_exit( "expected data file $zscore_file does not exist" );
 }
 
 ## get max absolute error
@@ -244,3 +244,133 @@ echo "$png\n";
 file_put_contents( "plot.json", "\n" . json_encode( $plot ) . "\n\n" );
 
                    
+### plot zscore
+
+echo "$zscore_file\n";
+
+if ( false === ( $zscore_file_contents = file_get_contents( $zscore_file ) ) ) {
+    error_exit( "error reading $zscore_file" );
+}
+
+$lines = explode( "\n", $zscore_file_contents );
+
+$headers = explode( ",", trim( array_shift( $lines ) ) );
+
+debug_json( 'headers', $headers );
+
+$zsd = (object)[];
+
+foreach ( $lines as $l ) {
+    # $l = trim( str_replace( ', ', '_', $l ) );
+    $l = trim( $l );
+    if ( empty( $l ) ) {
+        continue;
+    }
+    
+    ++$total_jobs;
+    
+    $linedata = explode( ",", $l );
+    foreach ( $linedata as $k => $v ) {
+        if ( !isset( $zsd->{$headers[$k]} ) ) {
+            $zsd->{$headers[$k]} = [];
+        }
+        $zsd->{$headers[$k]}[] = floatval( $v );
+    }
+}
+
+#debug_json( "zsd", $zsd );
+
+$plot = json_decode(
+'
+{
+    "data" : [
+        {
+            "x"       : []
+            ,"y"       : []
+            ,"type"    : "scatter"
+        }
+        ,{
+            "x"       : []
+            ,"y"       : []
+            ,"yaxis"   : "y2"
+            ,"type"    : "scatter"
+        }
+    ]
+    ,"layout" : {
+        "title" : {
+            "text" : ""
+        }
+        ,"font" : {
+            "color"  : "rgb(0,5,80)"
+        }
+        ,"margin" : {
+            "b" : 100
+        }
+        ,"showlegend" : false
+        ,"paper_bgcolor": "white"
+        ,"plot_bgcolor": "white"
+        ,"xaxis" : {
+            "gridcolor" : "rgba(111,111,111,0.5)"
+            ,"type" : "linear"
+            ,"title" : {
+                "text" : "z-score"
+                ,"font" : {
+                    "color"  : "rgb(0,5,80)"
+                }
+            }
+            ,"showticklabels" : true
+            ,"showline"       : true
+        }
+        ,"yaxis" : {
+            "gridcolor" : "rgba(111,111,111,0.5)"
+            ,"type" : "linear"
+            ,"title" : {
+                "text" : "percent accepted"
+                ,"font" : {
+                    "color"  : "rgb(0,5,80)"
+                }
+            }
+        }
+        ,"yaxis2" : {
+            "gridcolor" : "rgba(111,111,111,0.5)"
+            ,"type" : "linear"
+            ,"title" : {
+                "text" : "Maximum absolute prediction error"
+                ,"font" : {
+                    "color"  : "rgb(0,5,80)"
+                }
+            }
+            ,"showline"       : true
+            ,"overlaying"     : "y"
+            ,"side"           : "right"
+        }
+    }
+}
+                '
+    );
+
+$plot->data[0]->x = $zsd->z_score;
+$plot->data[0]->y = $zsd->percent_records_accepted;
+$plot->data[1]->x = $zsd->z_score;
+$plot->data[1]->y = $zsd->accepted_maximum_absolute_error;
+
+if ( isset( $title ) ) {
+    $plot->layout->title->text .= "$title<br>";
+}
+$plot->layout->title->text .=
+    "title"
+    ;
+
+$plotobj = [
+    "plotlydata" => $plot
+    ,"_height" => 1000
+    ,"_width" => 2000
+];
+
+# debug_json( "plot", $plot );
+
+file_put_contents( "plotzscoreforpy.json", "\n" . json_encode( $plotobj ) . "\n\n" );
+$png = run_cmd( "$selfdir/plotly2img.py plotzscoreforpy.json" );
+echo "$png\n";
+
+file_put_contents( "plotzscore.json", "\n" . json_encode( $plot ) . "\n\n" );

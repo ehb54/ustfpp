@@ -35,5 +35,5 @@ useheight = int( float( data[ '_height' ] ) )
 
 #go.Figure( data['plotlydata' ] ), format="png", width=usewidth, height=useheight ).write_image("plotly.png")
 
-go.Figure( data['plotlydata' ] ).write_image("plotly.png")
+go.Figure( data['plotlydata' ] ).write_image(f'{filename}.png')
 
