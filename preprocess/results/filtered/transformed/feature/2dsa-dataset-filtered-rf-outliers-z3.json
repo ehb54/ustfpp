@@ -1,0 +1,80 @@
+{
+    "job.jobParameters.mc_iterations.@attributes.value": {
+        "key": 0,
+        "feature": "feature_job.jobParameters.mc_iterations.@attributes.value",
+        "min": "0",
+        "max": "200",
+        "sum": 1851792,
+        "sum2": 106546516,
+        "mean": 8.07887825350982,
+        "sd": 19.989189868767145,
+        "accept_min": -51.88869135279162,
+        "accept_max": 68.04644785981125,
+        "median": 1
+    },
+    "edited_scans.0": {
+        "key": 1,
+        "feature": "feature_edited_scans.0",
+        "min": "1",
+        "max": "1500",
+        "sum": 33337490,
+        "sum2": 9362333660,
+        "mean": 145.44264311953023,
+        "sd": 140.32785415596717,
+        "accept_min": -275.5409193483713,
+        "accept_max": 566.4262055874317,
+        "median": 99
+    },
+    "job.jobParameters.s_grid_points.@attributes.value": {
+        "key": 2,
+        "feature": "feature_job.jobParameters.s_grid_points.@attributes.value",
+        "min": "9",
+        "max": "2112",
+        "sum": 20280662,
+        "sum2": 3598918978,
+        "mean": 88.4791592136606,
+        "sd": 88.72769272289082,
+        "accept_min": -177.7039189550119,
+        "accept_max": 354.66223738233305,
+        "median": 64
+    },
+    "job.jobParameters.uniform_grid.@attributes.value": {
+        "key": 3,
+        "feature": "feature_job.jobParameters.uniform_grid.@attributes.value",
+        "min": "1",
+        "max": "67",
+        "sum": 1981352,
+        "sum2": 17809676,
+        "mean": 8.64411423386006,
+        "sd": 1.7257472492671166,
+        "accept_min": 3.46687248605871,
+        "accept_max": 13.82135598166141,
+        "median": 8
+    },
+    "edited_radial_points.0": {
+        "key": 4,
+        "feature": "feature_edited_radial_points.0",
+        "min": "28",
+        "max": "3162",
+        "sum": 139500714,
+        "sum2": 130177707896,
+        "mean": 608.6046838325757,
+        "sd": 444.44580880689614,
+        "accept_min": -724.7327425881127,
+        "accept_max": 1941.9421102532642,
+        "median": 706
+    },
+    "job.cluster.@attributes.name": {
+        "key": 8,
+        "feature": "feature_job.cluster.@attributes.name",
+        "min": "1",
+        "max": "33",
+        "sum": 3983673,
+        "sum2": 91349729,
+        "mean": 17.379710663397525,
+        "sd": 9.822462110994849,
+        "accept_min": -12.087675669587021,
+        "accept_max": 46.84709699638207,
+        "median": 17
+    }
+}
