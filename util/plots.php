@@ -3,6 +3,19 @@
 
 {};
 
+const PLOTLY_COLORS         = [
+    '#1f77b4'  # muted blue
+    ,'#ff7f0e'  # safety orange
+    ,'#2ca02c'  # cooked asparagus green
+    ,'#d62728'  # brick red
+    ,'#9467bd'  # muted purple
+    ,'#8c564b'  # chestnut brown
+    ,'#e377c2'  # raspberry yogurt pink
+    ,'#7f7f7f'  # middle gray
+    ,'#bcbd22'  # curry yellow-green
+    ,'#17becf'  # blue-teal
+    ];
+
 $secs_limit = 300;
 
 $self = __FILE__;
@@ -205,7 +218,7 @@ $plot = json_decode(
             "gridcolor" : "rgba(111,111,111,0.5)"
             ,"type" : "log"
             ,"title" : {
-                "text" : "Minutes (log scale)"
+                "text" : "Absolute prediction error [minutes] (log scale)"
                 ,"font" : {
                     "color"  : "rgb(0,5,80)"
                 }
@@ -288,12 +301,18 @@ $plot = json_decode(
             "x"       : []
             ,"y"       : []
             ,"type"    : "scatter"
+            ,"line"    : {
+                "color"  : "#1f77b4"
+            }
         }
         ,{
             "x"       : []
             ,"y"       : []
             ,"yaxis"   : "y2"
             ,"type"    : "scatter"
+            ,"line"    : {
+                "color"  : "#2ca02c"
+            }
         }
     ]
     ,"layout" : {
@@ -313,7 +332,7 @@ $plot = json_decode(
             "gridcolor" : "rgba(111,111,111,0.5)"
             ,"type" : "linear"
             ,"title" : {
-                "text" : "z-score"
+                "text" : "z-score cutoff"
                 ,"font" : {
                     "color"  : "rgb(0,5,80)"
                 }
@@ -327,7 +346,7 @@ $plot = json_decode(
             ,"title" : {
                 "text" : "percent accepted"
                 ,"font" : {
-                    "color"  : "rgb(0,5,80)"
+                    "color"  : "#1f77b4"
                 }
             }
         }
@@ -335,9 +354,9 @@ $plot = json_decode(
             "gridcolor" : "rgba(111,111,111,0.5)"
             ,"type" : "linear"
             ,"title" : {
-                "text" : "Maximum absolute prediction error"
+                "text" : "Maximum absolute prediction error [minutes]"
                 ,"font" : {
-                    "color"  : "rgb(0,5,80)"
+                    "color"  : "#2ca02c"
                 }
             }
             ,"showline"       : true
@@ -352,13 +371,13 @@ $plot = json_decode(
 $plot->data[0]->x = $zsd->z_score;
 $plot->data[0]->y = $zsd->percent_records_accepted;
 $plot->data[1]->x = $zsd->z_score;
-$plot->data[1]->y = $zsd->accepted_maximum_absolute_error;
+$plot->data[1]->y = array_map( function($v) { return $v / 60; }, $zsd->accepted_maximum_absolute_error );
 
 if ( isset( $title ) ) {
     $plot->layout->title->text .= "$title<br>";
 }
 $plot->layout->title->text .=
-    "title"
+    "Percent jobs accepted and Maximum absolute error<br>vs<br>z-score outlier rejection cutoff"
     ;
 
 $plotobj = [
