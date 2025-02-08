@@ -1,0 +1,10 @@
+Run,Type,z-score 2 max absolute error ,,,,z-score 2.98 absolute error,,,
+,,days,hours,minutes,percentage,days,hours,minutes,percentage
+2DSA Combined,Grid Search,,11h,38m,68%,,19h,20m,93%
+2DSA Lasso,Grid Search,,17h,50m,77%,1d,8h,,95%
+2DSA Random Forest,Grid Search,1d,2h,,78%,1d,2h,,92%
+2DSA xgBoost,Grid Search,,20h,22m,79%,,20h,24m,93%
+2DSA Randomized,Grid Search (limited by best models from previous runs),,2h,11m,56%,,11h,34m,89%
+2DSA Randomized 500 Epochs,Grid Search (limited by best models from previous runs),,2h,11m,56%,,11h,26m,89%
+PCSA,Grid Search,,1h,57m,63.93,,5h,17m,90%
+PCSA Randomized,Grid Search ,,1h,46m,63%,,5h,27m,90%
