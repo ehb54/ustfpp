@@ -34,6 +34,16 @@ class EnhancedPredictionFramework:
 
     def load_config(self, config_file, config_json_data):
 
+        # Handle output directory from config if not overridden by CLI
+        if "output_dir" in config_json_data and self.output_dir == 'results/prediction':
+            self.output_dir = config_json_data["output_dir"]
+            self.checkpoint_file = os.path.join(self.output_dir, 'checkpoint.json')
+            self.models_dir = os.path.join(self.output_dir, 'models')
+            self.error_analysis_dir = os.path.join(self.output_dir, 'error_analysis')
+            os.makedirs(self.output_dir, exist_ok=True)
+            os.makedirs(self.models_dir, exist_ok=True)
+            os.makedirs(self.error_analysis_dir, exist_ok=True)
+
         key = "scalers"
         if key in config_json_data:
             self.scalers = config_json_data[key]
@@ -155,6 +165,7 @@ class EnhancedPredictionFramework:
             'robust': RobustScaler()
         }
         return scalers.get(scaler_name)
+
 
     def save_checkpoint(self, experiment_type, arch_idx, scaler_idx, optimizer_idx, batch_idx, activation_idx, dropout_idx):
         """

@@ -300,6 +300,49 @@ class MonteCarloFeatureSelector:
         ignore_features = self.config.get('ignore_features', [])
         cols_to_use = [col for col in X.columns if col not in ignore_features]
         return X[cols_to_use]
+    def _compile_results(self):
+        """Compile results from all iterations into summary DataFrames."""
+        try:
+            compiled_results = {}
+
+            for method in ['lasso', 'xgboost', 'random_forest']:
+                # Convert importance scores to numpy array
+                importance_matrix = np.array(self.results[method]['importance_scores'])
+
+                # Calculate statistics
+                mean_importance = np.mean(importance_matrix, axis=0)
+                std_importance = np.std(importance_matrix, axis=0)
+
+                # Get feature names
+                feature_names = self.filtered_features.columns
+
+                # Calculate selection frequency as percentage
+                n_iterations = len(self.results[method]['importance_scores'])
+                selection_frequency = {
+                    feature: (count / n_iterations) * 100
+                    for feature, count in self.results[method]['selection_frequency'].items()
+                }
+
+                # Create DataFrame with results
+                df = pd.DataFrame({
+                    'feature': feature_names,
+                    'mean_importance': mean_importance,
+                    'std_importance': std_importance,
+                    'selection_frequency': [selection_frequency.get(feat, 0) for feat in feature_names],
+                    'mean_execution_time': np.mean(self.results[method]['execution_times'])
+                })
+
+                # Sort by mean importance
+                df = df.sort_values('mean_importance', ascending=False).reset_index(drop=True)
+
+                compiled_results[method] = df
+
+            return compiled_results
+
+        except Exception as e:
+            self.logger.error(f"Failed to compile results: {str(e)}")
+            self.logger.error(traceback.format_exc())
+            raise
 
     def run_analysis(self):
         """Run Monte Carlo feature selection analysis."""
