@@ -4,11 +4,11 @@ import pandas as pd
 import re
 
 # Load data and skip description row only
-data_file = "data/run_metrics_final.csv"
+data_file = "data/feature_run_metrics.csv"
 df = pd.read_csv(data_file, encoding="ISO-8859-1", skiprows=[1])
 
 # Rename columns based on the structure
-df.columns = ['Run', 'Type',
+df.columns = ['Run',
               'z2_days', 'z2_hours', 'z2_minutes', 'z2_percentage',
               'z298_days', 'z298_hours', 'z298_minutes', 'z298_percentage']
 
