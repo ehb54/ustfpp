@@ -3,11 +3,13 @@
         "source_directory": "./results",
         "file_patterns": [
             "2dsa-dataset.csv"
+            ,"ga-dataset.csv"
+            ,"pcsa-dataset.csv"
         ],
         "file_type": "csv"
     },
     "output_files": {
-        "directory": "./results/filtered/transformed",
+        "directory": "./results/filtered/",
         "prefix": "filtered_",
         "suffix": ".csv",
         "metrics_file": "preprocessing_metrics.csv"

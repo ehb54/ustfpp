@@ -121,8 +121,10 @@ def find_and_combine_metadata(root_dir):
     metrics = {
         'total_files': 0,
         'files_with_errors': 0,
-        'experiment_counts': {'2DSA': 0, 'GA': 0, 'PCSA': 0},
-        'filtered_counts': {'2DSA': 0, 'GA': 0, 'PCSA': 0}
+        'initial_counts': {'2DSA': 0, 'GA': 0, 'PCSA': 0},
+        'records_removed': {'2DSA': 0, 'GA': 0, 'PCSA': 0},
+        'final_counts': {'2DSA': 0, 'GA': 0, 'PCSA': 0},
+        'column_counts': {'2DSA': 0, 'GA': 0, 'PCSA': 0}
     }
 
     all_errors = []
@@ -151,10 +153,9 @@ def find_and_combine_metadata(root_dir):
                 df_filtered = df[df[method_column].isin(method_values)].copy()
 
                 if len(df_filtered) > 0:
-                    df_filtered.loc[:, 'source_file'] = file_path
-                    df_filtered.loc[:, 'directory'] = os.path.dirname(file_path)
+                    # Removed the lines that add source_file and directory
                     experiment_dfs[exp_type].append(df_filtered)
-                    metrics['experiment_counts'][exp_type] += len(df_filtered)
+                    metrics['initial_counts'][exp_type] += len(df_filtered)
 
         except Exception as e:
             error_message = f"Error processing {file_path}: {str(e)}"
@@ -180,7 +181,9 @@ def find_and_combine_metadata(root_dir):
             # Filter rows where all specified edited_radial_points are zero
             initial_count = len(combined_df)
             filtered_df = combined_df[combined_df[edited_columns].sum(axis=1) == 0]
-            metrics['filtered_counts'][exp_type] = initial_count - len(filtered_df)
+            metrics['records_removed'][exp_type] = initial_count - len(filtered_df)
+            metrics['final_counts'][exp_type] = len(filtered_df)
+            metrics['column_counts'][exp_type] = len(filtered_df.columns)
 
             combined_dfs[exp_type] = filtered_df
 
@@ -200,14 +203,20 @@ def main():
 
     # Save metrics to CSV
     metrics_df = pd.DataFrame([{
-        'total_files': metrics['total_files'],
+        'total_files_processed': metrics['total_files'],
         'files_with_errors': metrics['files_with_errors'],
-        '2DSA_total': metrics['experiment_counts']['2DSA'],
-        '2DSA_filtered': metrics['filtered_counts']['2DSA'],
-        'GA_total': metrics['experiment_counts']['GA'],
-        'GA_filtered': metrics['filtered_counts']['GA'],
-        'PCSA_total': metrics['experiment_counts']['PCSA'],
-        'PCSA_filtered': metrics['filtered_counts']['PCSA']
+        '2DSA_initial_count': metrics['initial_counts']['2DSA'],
+        '2DSA_records_removed': metrics['records_removed']['2DSA'],
+        '2DSA_final_count': metrics['final_counts']['2DSA'],
+        '2DSA_column_count': metrics['column_counts']['2DSA'],
+        'GA_initial_count': metrics['initial_counts']['GA'],
+        'GA_records_removed': metrics['records_removed']['GA'],
+        'GA_final_count': metrics['final_counts']['GA'],
+        'GA_column_count': metrics['column_counts']['GA'],
+        'PCSA_initial_count': metrics['initial_counts']['PCSA'],
+        'PCSA_records_removed': metrics['records_removed']['PCSA'],
+        'PCSA_final_count': metrics['final_counts']['PCSA'],
+        'PCSA_column_count': metrics['column_counts']['PCSA']
     }])
 
     metrics_df.to_csv(os.path.join(OUTPUT_DIRECTORY, 'processing_metrics.csv'), index=False)
@@ -217,7 +226,10 @@ def main():
             output_file = os.path.join(OUTPUT_DIRECTORY, f'{exp_type.lower()}-dataset.csv')
             df.to_csv(output_file, index=False)
             print(f"\n{exp_type} dataset saved to: {output_file}")
-            print(f"Total size: {len(df)} rows × {len(df.columns)} columns")
+            print(f"Initial records: {metrics['initial_counts'][exp_type]}")
+            print(f"Records removed: {metrics['records_removed'][exp_type]}")
+            print(f"Final records: {metrics['final_counts'][exp_type]}")
+            print(f"Number of columns: {metrics['column_counts'][exp_type]}")
 
 if __name__ == "__main__":
     main()
