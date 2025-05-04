@@ -1,0 +1,47 @@
+{
+    "output_dir" : "results",
+    "experiment_files" : {
+        "2DSA": "./preprocess/results/filtered/transformed/feature/2dsa-dataset-filtered-xgboost.csv"
+#        "GA": "./preprocess/results/filtered/ga-filtered.csv",
+#        "PCSA": "./preprocess/results/filtered/pcsa-filtered-randomized.csv"
+    }
+    ,"architectures" : [
+      #  [64, 64]
+	[64, 32]
+	,[128, 64]
+        ,[256, 128, 64]
+        ,[512, 256, 128]
+        ]
+    ,"scalers" : [
+        "standard"
+        ,"minmax"
+        ,"robust"
+    ]
+    ,"optimizers" : [
+        "adam"
+        ,"rmsprop"
+        ,"sgd"
+    ]
+    ,"batch_sizes" : [
+        16
+        ,32
+        ,64
+    ]
+    ,"activations" : [
+        "relu"
+        ,"elu"
+    ]
+    ,"dropout_rates" : [
+        0.2
+        ,0.3
+    ]
+    ,"epochs" : 100
+    ,"mirroredstrategy" : false
+    ,"patience" : 25
+    ,"training_fraction" : 0.7
+    ,"validation_fraction" : 0.15
+## prevents gpu from hogging memory
+    ,"gpu_mem_grow" : true
+## select gpu to use
+##    ,"usegpu" : 2
+}
