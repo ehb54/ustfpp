@@ -3,8 +3,11 @@ import pandas as pd
 import glob
 from pathlib import Path
 
-ROOT_DIRECTORY = "."
-OUTPUT_DIRECTORY = "./results"
+# Points to project root (one level up from the script)
+ROOT_DIRECTORY = os.path.join(os.path.dirname(__file__), "..")
+
+# Output relative to script
+OUTPUT_DIRECTORY = os.path.join(os.path.dirname(__file__), "results", "formatted")
 
 # Define the column names in order
 COLUMN_NAMES = [
@@ -69,7 +72,7 @@ COLUMN_NAMES = [
     'job.jobParameters.z_value.@attributes.value',
     'simpoints.0', 'simpoints.1', 'simpoints.2', 'simpoints.3', 'simpoints.4',
     'simpoints.5', 'simpoints.6', 'simpoints.7', 'simpoints.8', 'simpoints.9',
-    'CPUTime', 'max_rss', 'wallTime'
+    'CPUTime', 'max_rss', 'wallTime', 'system'
 ]
 
 def read_space_delimited(file_path):
@@ -130,7 +133,8 @@ def find_and_combine_metadata(root_dir):
     all_errors = []
     error_files = []
 
-    pattern = os.path.join(root_dir, '**/summary_metadata.csv')
+    # search in data folder and subdirectories
+    pattern = os.path.join(root_dir, 'data', '**/summary_metadata.csv')
     all_files = glob.glob(pattern, recursive=True)
     metrics['total_files'] = len(all_files)
 

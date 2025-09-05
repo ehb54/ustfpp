@@ -1,0 +1,64 @@
+{
+    "input_files": {
+        "source_directory": "./results/formatted",
+        "file_patterns": [
+            "2dsa-dataset.csv",
+            "ga-dataset.csv",
+            "pcsa-dataset.csv"
+        ],
+        "file_type": "csv"
+    },
+    "output_files": {
+        "directory": "./results/cleaned/",
+        "prefix": "filtered_",
+        "suffix": ".csv",
+        "metrics_file": "preprocessing_metrics.csv",
+        "models": {
+            "2dsa": {
+                "filename": "2dsa_filtered.csv",
+                "metrics_file": "2dsa_metrics.csv"
+            },
+            "ga": {
+                "filename": "ga_filtered.csv",
+                "metrics_file": "ga_metrics.csv"
+            },
+            "pcsa": {
+                "filename": "pcsa_filtered.csv",
+                "metrics_file": "pcsa_metrics.csv"
+            }
+        }
+    },
+    "column_configuration": {
+        "model_columns": {
+            "2dsa": {
+                "keep_columns": [],
+                "negative_value_handling": {
+                    "mode": "all_columns"
+                }
+            },
+            "ga": {
+                "keep_columns": [],
+                "negative_value_handling": {
+                    "mode": "all_columns"
+                }
+            },
+            "pcsa": {
+                "keep_columns": [],
+                "negative_value_handling": {
+                    "mode": "disabled"
+                }
+            }
+        }
+    },
+    "uniform_columns": {
+        "remove": true,
+        "threshold": 1
+    },
+    "negative_value_handling": {
+        "mode": "disabled"
+    },
+    "logging": {
+        "log_level": "INFO",
+        "log_file": "2dsa_preprocessing.log"
+    }
+}
