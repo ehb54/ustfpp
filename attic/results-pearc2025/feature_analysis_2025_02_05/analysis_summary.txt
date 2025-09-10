@@ -1,0 +1,90 @@
+Analysis completed at: 2025-02-04 22:51:14.228010
+Configuration used: {
+  "data_file": "../preprocess/results/filtered/transformed/2dsa-dataset-filtered.csv",
+  "n_iterations": 150,
+  "test_size": 0.4,
+  "output_dir": "results/feature/monte_carlo",
+  "ignore_features": [
+    "max_rss",
+    "wallTime"
+  ],
+  "lasso_params": {
+    "alpha": 0.01,
+    "max_iter": 2000,
+    "fit_intercept": true,
+    "tol": 0.0001,
+    "selection": "random",
+    "random_state": 42
+  },
+  "xgboost_params": {
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "n_estimators": 200,
+    "objective": "reg:squarederror",
+    "verbosity": 0,
+    "early_stopping_rounds": 20,
+    "eval_metric": "rmse",
+    "tree_method": "hist",
+    "random_state": 42,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8
+  },
+  "rf_params": {
+    "n_estimators": 200,
+    "max_depth": null,
+    "min_samples_split": 5,
+    "min_samples_leaf": 3,
+    "random_state": 42,
+    "n_jobs": -1,
+    "max_features": "sqrt",
+    "bootstrap": true,
+    "oob_score": true
+  },
+  "excluded_columns": []
+}
+
+
+LASSO Results:
+Number of features with non-zero importance: 22
+Top 10 most important features:
+                                               feature  mean_importance  std_importance  selection_frequency  mean_execution_time
+0   job.jobParameters.meniscus_range.@attributes.value      1095.379936     1147.664052            73.333333             2.354229
+1   job.jobParameters.ff0_resolution.@attributes.value       261.638237       32.941904           100.000000             2.354229
+2          job.jobParameters.ff0_min.@attributes.value       125.901269       21.444610           100.000000             2.354229
+3     job.jobParameters.uniform_grid.@attributes.value       123.943196       32.405843           100.000000             2.354229
+4  job.jobParameters.meniscus_points.@attributes.value        60.701601        4.039804           100.000000             2.354229
+5   job.jobParameters.tinoise_option.@attributes.value        53.181625       16.991844           100.000000             2.354229
+6     job.jobParameters.s_resolution.@attributes.value        43.824014        7.696926           100.000000             2.354229
+7   job.jobParameters.rinoise_option.@attributes.value        34.233398       11.265550           100.000000             2.354229
+8  job.jobParameters.ff0_grid_points.@attributes.value        28.021443        3.161885           100.000000             2.354229
+9    job.jobParameters.mc_iterations.@attributes.value        26.646704        0.496684           100.000000             2.354229
+
+XGBOOST Results:
+Number of features with non-zero importance: 22
+Top 10 most important features:
+                                               feature  mean_importance  std_importance  selection_frequency  mean_execution_time
+0     job.jobParameters.uniform_grid.@attributes.value         0.156826        0.025451                100.0            10.574537
+1    job.jobParameters.s_grid_points.@attributes.value         0.107707        0.019311                100.0            10.574537
+2    job.jobParameters.mc_iterations.@attributes.value         0.104799        0.010294                100.0            10.574537
+3   job.jobParameters.ff0_resolution.@attributes.value         0.067086        0.049040                100.0            10.574537
+4                                          simpoints.0         0.061095        0.026171                100.0            10.574537
+5          job.jobParameters.ff0_min.@attributes.value         0.055753        0.038984                100.0            10.574537
+6  job.jobParameters.meniscus_points.@attributes.value         0.052843        0.009415                100.0            10.574537
+7     job.jobParameters.s_resolution.@attributes.value         0.046389        0.011498                100.0            10.574537
+8   job.jobParameters.meniscus_range.@attributes.value         0.040534        0.008714                100.0            10.574537
+9  job.jobParameters.ff0_grid_points.@attributes.value         0.040526        0.010718                100.0            10.574537
+
+RANDOM_FOREST Results:
+Number of features with non-zero importance: 22
+Top 10 most important features:
+                                               feature  mean_importance  std_importance  selection_frequency  mean_execution_time
+0    job.jobParameters.mc_iterations.@attributes.value         0.124230        0.006394                100.0             4.509717
+1                                       edited_scans.0         0.098115        0.004162                100.0             4.509717
+2                                              max_rss         0.078928        0.003177                100.0             4.509717
+3    job.jobParameters.s_grid_points.@attributes.value         0.069522        0.003895                100.0             4.509717
+4     job.jobParameters.uniform_grid.@attributes.value         0.067123        0.003435                100.0             4.509717
+5                               edited_radial_points.0         0.060925        0.003220                100.0             4.509717
+6  job.jobParameters.meniscus_points.@attributes.value         0.055388        0.007378                100.0             4.509717
+7  job.jobParameters.ff0_grid_points.@attributes.value         0.049404        0.003185                100.0             4.509717
+8   job.jobParameters.tinoise_option.@attributes.value         0.045739        0.002823                100.0             4.509717
+9                                             wallTime         0.042510        0.002339                100.0             4.509717
