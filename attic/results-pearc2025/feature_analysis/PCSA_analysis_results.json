@@ -1,0 +1,569 @@
+{
+  "qualitative": {
+    "wallTime": {
+      "mutual_information": 0.7767562037989171,
+      "entropy": 15.468496770628144,
+      "unique_values": 45340
+    }
+  },
+  "quantitative": {
+    "correlations": {
+      "CPUCount": 0.05855217630072573,
+      "edited_radial_points.0": 0.004347605405702714,
+      "edited_scans.0": 0.2987909172515743,
+      "job.cluster.@attributes.name": 0.19652361758051573,
+      "job.jobParameters.curve_type.@attributes.value": 0.08606322829412696,
+      "job.jobParameters.curves_points.@attributes.value": 0.5203950078201218,
+      "job.jobParameters.ff0_max.@attributes.value": 0.006400154013417654,
+      "job.jobParameters.ff0_min.@attributes.value": 0.007097340150000075,
+      "job.jobParameters.gfit_iterations.@attributes.value": 0.19527663010664947,
+      "job.jobParameters.mc_iterations.@attributes.value": 0.03170941065452059,
+      "job.jobParameters.rinoise_option.@attributes.value": 0.10676525614993533,
+      "job.jobParameters.s_max.@attributes.value": 0.005554342501966667,
+      "job.jobParameters.s_min.@attributes.value": 0.00720089381065001,
+      "job.jobParameters.solute_type.@attributes.value": 0.08145890389348379,
+      "job.jobParameters.thr_deltr_ratio.@attributes.value": 0.02850484382076026,
+      "job.jobParameters.tikreg_alpha.@attributes.value": 0.019754982705699024,
+      "job.jobParameters.tikreg_option.@attributes.value": 0.08367813387600007,
+      "job.jobParameters.tinoise_option.@attributes.value": 0.006758220206350085,
+      "job.jobParameters.vars_count.@attributes.value": 0.06468730264503718,
+      "job.jobParameters.x_max.@attributes.value": 0.0003986692987437603,
+      "job.jobParameters.x_min.@attributes.value": 2.2111440783497977e-05,
+      "job.jobParameters.y_max.@attributes.value": 0.0067813991460963265,
+      "job.jobParameters.y_min.@attributes.value": 0.0011567107724846843,
+      "job.jobParameters.z_value.@attributes.value": 0.0167644626691155,
+      "simpoints.0": 0.01561921378208314,
+      "max_rss": 0.1563391569734579
+    },
+    "mutual_information": {
+      "CPUCount": 0.24616285627485546,
+      "edited_radial_points.0": 1.2737980878460426,
+      "edited_scans.0": 1.3623328470364058,
+      "job.cluster.@attributes.name": 0.560062197709505,
+      "job.jobParameters.curve_type.@attributes.value": 0.47824764381052454,
+      "job.jobParameters.curves_points.@attributes.value": 0.11503717887802134,
+      "job.jobParameters.ff0_max.@attributes.value": 0.0026411282760947508,
+      "job.jobParameters.ff0_min.@attributes.value": 0.0,
+      "job.jobParameters.gfit_iterations.@attributes.value": 0.10321920098525794,
+      "job.jobParameters.mc_iterations.@attributes.value": 0.11291772802992028,
+      "job.jobParameters.rinoise_option.@attributes.value": 0.038741473886849676,
+      "job.jobParameters.s_max.@attributes.value": 0.002853851894195625,
+      "job.jobParameters.s_min.@attributes.value": 0.004507012249478581,
+      "job.jobParameters.solute_type.@attributes.value": 0.10812529793562042,
+      "job.jobParameters.thr_deltr_ratio.@attributes.value": 0.00516625230894574,
+      "job.jobParameters.tikreg_alpha.@attributes.value": 0.05365267482380265,
+      "job.jobParameters.tikreg_option.@attributes.value": 0.15670466938799077,
+      "job.jobParameters.tinoise_option.@attributes.value": 0.09220286408111367,
+      "job.jobParameters.vars_count.@attributes.value": 0.14050630637465433,
+      "job.jobParameters.x_max.@attributes.value": 0.5080890888173384,
+      "job.jobParameters.x_min.@attributes.value": 0.211561425978799,
+      "job.jobParameters.y_max.@attributes.value": 0.3358301880226131,
+      "job.jobParameters.y_min.@attributes.value": 0.40565706991272954,
+      "job.jobParameters.z_value.@attributes.value": 0.5556691445529709,
+      "simpoints.0": 0.005560209142102757,
+      "max_rss": 1.3338624422109397
+    },
+    "f_scores": {
+      "CPUCount": 155.96958498696168,
+      "edited_radial_points.0": 0.8569802381206336,
+      "edited_scans.0": 4444.371617460229,
+      "job.cluster.@attributes.name": 1821.3670148522647,
+      "job.jobParameters.curve_type.@attributes.value": 338.31897992687095,
+      "job.jobParameters.curves_points.@attributes.value": 16837.92115606428,
+      "job.jobParameters.ff0_max.@attributes.value": 1.8572099341078179,
+      "job.jobParameters.ff0_min.@attributes.value": 2.2838915351173843,
+      "job.jobParameters.gfit_iterations.@attributes.value": 1797.4129223513567,
+      "job.jobParameters.mc_iterations.@attributes.value": 45.63264010911136,
+      "job.jobParameters.rinoise_option.@attributes.value": 522.758527888927,
+      "job.jobParameters.s_max.@attributes.value": 1.3987531244264135,
+      "job.jobParameters.s_min.@attributes.value": 2.351027403398994,
+      "job.jobParameters.solute_type.@attributes.value": 302.85229544540334,
+      "job.jobParameters.thr_deltr_ratio.@attributes.value": 36.86826571520988,
+      "job.jobParameters.tikreg_alpha.@attributes.value": 17.70048581423475,
+      "job.jobParameters.tikreg_option.@attributes.value": 319.69656514217155,
+      "job.jobParameters.tinoise_option.@attributes.value": 2.0708415553944612,
+      "job.jobParameters.vars_count.@attributes.value": 190.51164960901616,
+      "job.jobParameters.x_max.@attributes.value": 0.007205896361421902,
+      "job.jobParameters.x_min.@attributes.value": 2.2166465164328616e-05,
+      "job.jobParameters.y_max.@attributes.value": 2.0850714665425656,
+      "job.jobParameters.y_min.@attributes.value": 0.0606614098431238,
+      "job.jobParameters.z_value.@attributes.value": 12.745700486332264,
+      "simpoints.0": 11.06335020145418,
+      "max_rss": 1135.9122019617134
+    }
+  },
+  "stability": [
+    {
+      "feature": "job.jobParameters.curves_points.@attributes.value",
+      "mean_importance": 0.37485099700590796,
+      "std_importance": 0.0017025779114270786
+    },
+    {
+      "feature": "job.jobParameters.rinoise_option.@attributes.value",
+      "mean_importance": 0.18230298397485445,
+      "std_importance": 0.0018980671535316733
+    },
+    {
+      "feature": "wallTime",
+      "mean_importance": 0.09592736544769055,
+      "std_importance": 0.002281391640131301
+    },
+    {
+      "feature": "edited_scans.0",
+      "mean_importance": 0.09527592872721721,
+      "std_importance": 0.0018073210123563522
+    },
+    {
+      "feature": "job.jobParameters.curve_type.@attributes.value",
+      "mean_importance": 0.0798830466675818,
+      "std_importance": 0.0012053321697530223
+    },
+    {
+      "feature": "job.jobParameters.gfit_iterations.@attributes.value",
+      "mean_importance": 0.054720370974165565,
+      "std_importance": 0.00125557082098631
+    },
+    {
+      "feature": "max_rss",
+      "mean_importance": 0.036597817085727354,
+      "std_importance": 0.001256056226121052
+    },
+    {
+      "feature": "edited_radial_points.0",
+      "mean_importance": 0.018199843062300436,
+      "std_importance": 0.0009387577088809443
+    },
+    {
+      "feature": "job.jobParameters.x_max.@attributes.value",
+      "mean_importance": 0.014956906396919148,
+      "std_importance": 0.0005390480620270974
+    },
+    {
+      "feature": "job.cluster.@attributes.name",
+      "mean_importance": 0.01286224222804761,
+      "std_importance": 0.000605668067837734
+    },
+    {
+      "feature": "job.jobParameters.y_max.@attributes.value",
+      "mean_importance": 0.008239033512487594,
+      "std_importance": 0.0007980006137069012
+    },
+    {
+      "feature": "job.jobParameters.z_value.@attributes.value",
+      "mean_importance": 0.007315836993601513,
+      "std_importance": 0.0004727392104285766
+    },
+    {
+      "feature": "job.jobParameters.tinoise_option.@attributes.value",
+      "mean_importance": 0.0034044060595953734,
+      "std_importance": 0.0013934781355293359
+    },
+    {
+      "feature": "job.jobParameters.y_min.@attributes.value",
+      "mean_importance": 0.002871323574532498,
+      "std_importance": 0.0007896255049251561
+    },
+    {
+      "feature": "job.jobParameters.mc_iterations.@attributes.value",
+      "mean_importance": 0.002464875960062067,
+      "std_importance": 0.00041558413595996696
+    },
+    {
+      "feature": "job.jobParameters.vars_count.@attributes.value",
+      "mean_importance": 0.0022445121337455057,
+      "std_importance": 0.00010742020760750508
+    },
+    {
+      "feature": "job.jobParameters.x_min.@attributes.value",
+      "mean_importance": 0.0019424213180404277,
+      "std_importance": 0.00015851437137089387
+    },
+    {
+      "feature": "CPUCount",
+      "mean_importance": 0.0018157293322974455,
+      "std_importance": 0.00018192284774181332
+    },
+    {
+      "feature": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "mean_importance": 0.001475954498183674,
+      "std_importance": 0.00010695192147289087
+    },
+    {
+      "feature": "job.jobParameters.solute_type.@attributes.value",
+      "mean_importance": 0.0013122954482478924,
+      "std_importance": 0.00020776829432782938
+    },
+    {
+      "feature": "job.jobParameters.tikreg_option.@attributes.value",
+      "mean_importance": 0.0011771311888150665,
+      "std_importance": 5.5193873208008096e-05
+    },
+    {
+      "feature": "simpoints.0",
+      "mean_importance": 8.832562003938035e-05,
+      "std_importance": 2.313815595030942e-05
+    },
+    {
+      "feature": "job.jobParameters.tikreg_alpha.@attributes.value",
+      "mean_importance": 6.194619876623534e-05,
+      "std_importance": 1.005015524091335e-05
+    },
+    {
+      "feature": "job.jobParameters.ff0_max.@attributes.value",
+      "mean_importance": 2.7848361082419394e-06,
+      "std_importance": 7.824024051686625e-07
+    },
+    {
+      "feature": "job.jobParameters.ff0_min.@attributes.value",
+      "mean_importance": 2.236118501825406e-06,
+      "std_importance": 1.4717764624254265e-06
+    },
+    {
+      "feature": "job.jobParameters.s_max.@attributes.value",
+      "mean_importance": 2.0006628589080815e-06,
+      "std_importance": 7.92628568723693e-07
+    },
+    {
+      "feature": "job.jobParameters.s_min.@attributes.value",
+      "mean_importance": 1.6849737042568467e-06,
+      "std_importance": 8.529239235058124e-07
+    }
+  ],
+  "lasso": [
+    {
+      "feature": "job.jobParameters.curves_points.@attributes.value",
+      "coefficient": 1.6432687686201643e-13
+    },
+    {
+      "feature": "CPUCount",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "max_rss",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "simpoints.0",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.z_value.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.y_min.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.y_max.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.x_min.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.x_max.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.vars_count.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.tinoise_option.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.tikreg_option.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.tikreg_alpha.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.solute_type.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "edited_radial_points.0",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.s_min.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.s_max.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.rinoise_option.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.mc_iterations.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.gfit_iterations.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.ff0_min.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.ff0_max.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.curve_type.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.cluster.@attributes.name",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "edited_scans.0",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "wallTime",
+      "coefficient": 0.0
+    }
+  ],
+  "interactions": [
+    {
+      "feature1": "job.jobParameters.y_max.@attributes.value",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.3767252035689794
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.y_max.@attributes.value",
+      "interaction_score": 0.32309082150356144
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "job.jobParameters.y_max.@attributes.value",
+      "interaction_score": 0.31890527016275055
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "interaction_score": 0.3146148286851387
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "simpoints.0",
+      "interaction_score": 0.3002634520588603
+    },
+    {
+      "feature1": "job.jobParameters.y_max.@attributes.value",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.28496766842279275
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.z_value.@attributes.value",
+      "interaction_score": 0.254229039288267
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.25068763119020077
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.y_max.@attributes.value",
+      "interaction_score": 0.247472130023514
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "CPUCount",
+      "interaction_score": 0.24708091668155424
+    },
+    {
+      "feature1": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "feature2": "job.jobParameters.y_max.@attributes.value",
+      "interaction_score": 0.2457714643295583
+    },
+    {
+      "feature1": "job.jobParameters.x_min.@attributes.value",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.20304773940914791
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.19517657749142592
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "simpoints.0",
+      "interaction_score": 0.18050435598666914
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.17825685870638347
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.1718509212306617
+    },
+    {
+      "feature1": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.16949593469761462
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.15307479922664965
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "max_rss",
+      "interaction_score": 0.14527282997242802
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "interaction_score": 0.14350275772284046
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "simpoints.0",
+      "interaction_score": 0.1407366068665879
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.13736755351542107
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.y_min.@attributes.value",
+      "interaction_score": 0.12923454984753066
+    },
+    {
+      "feature1": "job.jobParameters.y_min.@attributes.value",
+      "feature2": "job.jobParameters.y_max.@attributes.value",
+      "interaction_score": 0.12794962373310262
+    },
+    {
+      "feature1": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "feature2": "max_rss",
+      "interaction_score": 0.1262522283307786
+    },
+    {
+      "feature1": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.12414255409110284
+    },
+    {
+      "feature1": "job.jobParameters.y_min.@attributes.value",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.109442069753733
+    },
+    {
+      "feature1": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "feature2": "job.jobParameters.z_value.@attributes.value",
+      "interaction_score": 0.10573931700920967
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.z_value.@attributes.value",
+      "interaction_score": 0.10410382754336525
+    },
+    {
+      "feature1": "job.jobParameters.z_value.@attributes.value",
+      "feature2": "job.jobParameters.y_min.@attributes.value",
+      "interaction_score": 0.09417848046682643
+    },
+    {
+      "feature1": "job.jobParameters.y_min.@attributes.value",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.0858565039155495
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.08482511353402654
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "job.jobParameters.y_min.@attributes.value",
+      "interaction_score": 0.07946603653409952
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.y_min.@attributes.value",
+      "interaction_score": 0.06733788522147356
+    },
+    {
+      "feature1": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "feature2": "simpoints.0",
+      "interaction_score": 0.06676118484698312
+    },
+    {
+      "feature1": "job.jobParameters.curves_points.@attributes.value",
+      "feature2": "job.jobParameters.z_value.@attributes.value",
+      "interaction_score": 0.06558275399259446
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.y_min.@attributes.value",
+      "interaction_score": 0.062387488774453895
+    },
+    {
+      "feature1": "job.jobParameters.thr_deltr_ratio.@attributes.value",
+      "feature2": "job.jobParameters.y_min.@attributes.value",
+      "interaction_score": 0.05324012501686383
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.y_max.@attributes.value",
+      "interaction_score": 0.05000333445832071
+    },
+    {
+      "feature1": "job.jobParameters.z_value.@attributes.value",
+      "feature2": "job.jobParameters.x_max.@attributes.value",
+      "interaction_score": 0.049044866540109686
+    },
+    {
+      "feature1": "job.jobParameters.z_value.@attributes.value",
+      "feature2": "job.jobParameters.y_max.@attributes.value",
+      "interaction_score": 0.04844021574183732
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "max_rss",
+      "interaction_score": 0.0440194194472082
+    },
+    {
+      "feature1": "job.jobParameters.z_value.@attributes.value",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.0326597444085025
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.x_min.@attributes.value",
+      "interaction_score": 0.020867605867233532
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.z_value.@attributes.value",
+      "interaction_score": 0.0029336245092349863
+    }
+  ]
+}

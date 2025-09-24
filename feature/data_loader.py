@@ -13,7 +13,7 @@ class DataLoader:
 
     def _prepare_data(self):
         # Split features and target
-        self.features = self.data.drop(['CPUTime', 'source_file', 'directory'], axis=1, errors='ignore')
+        self.features = self.data.drop(['CPUTime'], axis=1, errors='ignore')
         self.target = self.data['CPUTime']
         self.encoded_features = self._encode_features()
 

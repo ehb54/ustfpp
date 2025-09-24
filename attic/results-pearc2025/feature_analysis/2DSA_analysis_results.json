@@ -1,0 +1,521 @@
+{
+  "qualitative": {
+    "wallTime": {
+      "mutual_information": 1.0816967755573632,
+      "entropy": 18.017364528644624,
+      "unique_values": 265326
+    }
+  },
+  "quantitative": {
+    "correlations": {
+      "CPUCount": 0.031690503922124566,
+      "edited_radial_points.0": 0.09819399209073476,
+      "edited_scans.0": 0.11885903599512919,
+      "job.cluster.@attributes.name": 0.07222732356014455,
+      "job.jobParameters.ff0_grid_points.@attributes.value": 0.11644469983485035,
+      "job.jobParameters.ff0_max.@attributes.value": 0.0029372978088077054,
+      "job.jobParameters.ff0_min.@attributes.value": 0.011803616389275452,
+      "job.jobParameters.ff0_resolution.@attributes.value": 0.02468341101967389,
+      "job.jobParameters.max_iterations.@attributes.value": 0.012670357865246793,
+      "job.jobParameters.mc_iterations.@attributes.value": 0.2800249621406534,
+      "job.jobParameters.meniscus_points.@attributes.value": 0.1060261931933706,
+      "job.jobParameters.meniscus_range.@attributes.value": 0.10085212878745266,
+      "job.jobParameters.req_mgroupcount.@attributes.value": 0.00042740705503690953,
+      "job.jobParameters.rinoise_option.@attributes.value": 0.00040134435220562717,
+      "job.jobParameters.s_grid_points.@attributes.value": 0.13463672574767993,
+      "job.jobParameters.s_max.@attributes.value": 0.0037849854784461857,
+      "job.jobParameters.s_min.@attributes.value": 0.02041995796597737,
+      "job.jobParameters.s_resolution.@attributes.value": 0.10454711918181646,
+      "job.jobParameters.tinoise_option.@attributes.value": 0.16358845345703565,
+      "job.jobParameters.uniform_grid.@attributes.value": 0.17028488075098747,
+      "simpoints.0": 0.11089292302143784,
+      "max_rss": 0.22020179403461634
+    },
+    "mutual_information": {
+      "CPUCount": 0.05369397858203406,
+      "edited_radial_points.0": 0.6738912882022765,
+      "edited_scans.0": 0.6338256510691131,
+      "job.cluster.@attributes.name": 0.1729791322860743,
+      "job.jobParameters.ff0_grid_points.@attributes.value": 0.18191909565745146,
+      "job.jobParameters.ff0_max.@attributes.value": 0.19034132613702592,
+      "job.jobParameters.ff0_min.@attributes.value": 0.029791231764708215,
+      "job.jobParameters.ff0_resolution.@attributes.value": 0.10765008762505701,
+      "job.jobParameters.max_iterations.@attributes.value": 0.11047456655068855,
+      "job.jobParameters.mc_iterations.@attributes.value": 0.19825164652083993,
+      "job.jobParameters.meniscus_points.@attributes.value": 0.07099108567541146,
+      "job.jobParameters.meniscus_range.@attributes.value": 0.06893285410148797,
+      "job.jobParameters.req_mgroupcount.@attributes.value": 0.003348469098968465,
+      "job.jobParameters.rinoise_option.@attributes.value": 0.07110422503918024,
+      "job.jobParameters.s_grid_points.@attributes.value": 0.19160427853399842,
+      "job.jobParameters.s_max.@attributes.value": 0.2859826993909893,
+      "job.jobParameters.s_min.@attributes.value": 0.15319464555801954,
+      "job.jobParameters.s_resolution.@attributes.value": 0.1338133891411566,
+      "job.jobParameters.tinoise_option.@attributes.value": 0.11496628124766683,
+      "job.jobParameters.uniform_grid.@attributes.value": 0.15542785336668796,
+      "simpoints.0": 0.00571678647469831,
+      "max_rss": 0.6466267256506093
+    },
+    "f_scores": {
+      "CPUCount": 266.74969890943777,
+      "edited_radial_points.0": 2583.371816862179,
+      "edited_scans.0": 3802.3572048234914,
+      "job.cluster.@attributes.name": 1391.5021047446157,
+      "job.jobParameters.ff0_grid_points.@attributes.value": 3647.352773249239,
+      "job.jobParameters.ff0_max.@attributes.value": 2.2893330675274144,
+      "job.jobParameters.ff0_min.@attributes.value": 36.97429974568917,
+      "job.jobParameters.ff0_resolution.@attributes.value": 161.76490436257507,
+      "job.jobParameters.max_iterations.@attributes.value": 42.604626356165205,
+      "job.jobParameters.mc_iterations.@attributes.value": 22577.03403819601,
+      "job.jobParameters.meniscus_points.@attributes.value": 3016.792241683734,
+      "job.jobParameters.meniscus_range.@attributes.value": 2726.5866516528613,
+      "job.jobParameters.req_mgroupcount.@attributes.value": 0.04847219931003318,
+      "job.jobParameters.rinoise_option.@attributes.value": 0.04274089906956512,
+      "job.jobParameters.s_grid_points.@attributes.value": 4898.702416753873,
+      "job.jobParameters.s_max.@attributes.value": 3.801403137016628,
+      "job.jobParameters.s_min.@attributes.value": 110.68788441968688,
+      "job.jobParameters.s_resolution.@attributes.value": 2932.286675659415,
+      "job.jobParameters.tinoise_option.@attributes.value": 7296.173327407594,
+      "job.jobParameters.uniform_grid.@attributes.value": 7923.934055061635,
+      "simpoints.0": 3303.6244139240275,
+      "max_rss": 13521.880288918588
+    }
+  },
+  "stability": [
+    {
+      "feature": "edited_scans.0",
+      "mean_importance": 0.11505886078198072,
+      "std_importance": 0.0013129746604677954
+    },
+    {
+      "feature": "job.jobParameters.mc_iterations.@attributes.value",
+      "mean_importance": 0.11075505891916215,
+      "std_importance": 0.0005886695535298297
+    },
+    {
+      "feature": "job.jobParameters.s_grid_points.@attributes.value",
+      "mean_importance": 0.10474571461339424,
+      "std_importance": 0.0035685529457958726
+    },
+    {
+      "feature": "wallTime",
+      "mean_importance": 0.08531024894424925,
+      "std_importance": 0.0012622439077047904
+    },
+    {
+      "feature": "max_rss",
+      "mean_importance": 0.0850285270945106,
+      "std_importance": 0.0029083470237694048
+    },
+    {
+      "feature": "job.jobParameters.uniform_grid.@attributes.value",
+      "mean_importance": 0.06944986794193028,
+      "std_importance": 0.002940799547280574
+    },
+    {
+      "feature": "edited_radial_points.0",
+      "mean_importance": 0.06823954283812099,
+      "std_importance": 0.002091743892842607
+    },
+    {
+      "feature": "job.jobParameters.meniscus_points.@attributes.value",
+      "mean_importance": 0.05791456813818021,
+      "std_importance": 0.0015263475753139223
+    },
+    {
+      "feature": "job.jobParameters.max_iterations.@attributes.value",
+      "mean_importance": 0.05355122218257289,
+      "std_importance": 0.0019425150416523666
+    },
+    {
+      "feature": "job.cluster.@attributes.name",
+      "mean_importance": 0.04236532315592769,
+      "std_importance": 0.001482996683072672
+    },
+    {
+      "feature": "job.jobParameters.s_max.@attributes.value",
+      "mean_importance": 0.036852523497406364,
+      "std_importance": 0.0016082109484693568
+    },
+    {
+      "feature": "job.jobParameters.ff0_grid_points.@attributes.value",
+      "mean_importance": 0.03062145887111038,
+      "std_importance": 0.0025332238597252136
+    },
+    {
+      "feature": "job.jobParameters.s_min.@attributes.value",
+      "mean_importance": 0.025227217947522994,
+      "std_importance": 0.0009657511774224426
+    },
+    {
+      "feature": "job.jobParameters.meniscus_range.@attributes.value",
+      "mean_importance": 0.023943483516100855,
+      "std_importance": 0.001110155984250129
+    },
+    {
+      "feature": "job.jobParameters.s_resolution.@attributes.value",
+      "mean_importance": 0.021806905495736544,
+      "std_importance": 0.002555784171744011
+    },
+    {
+      "feature": "CPUCount",
+      "mean_importance": 0.020722756890910122,
+      "std_importance": 0.0013795986089585308
+    },
+    {
+      "feature": "job.jobParameters.ff0_max.@attributes.value",
+      "mean_importance": 0.01718742216867863,
+      "std_importance": 0.001416661119304924
+    },
+    {
+      "feature": "simpoints.0",
+      "mean_importance": 0.014712440105269573,
+      "std_importance": 0.0005645337138546538
+    },
+    {
+      "feature": "job.jobParameters.ff0_resolution.@attributes.value",
+      "mean_importance": 0.009333502375795982,
+      "std_importance": 0.0011796156655268387
+    },
+    {
+      "feature": "job.jobParameters.ff0_min.@attributes.value",
+      "mean_importance": 0.00297282013968887,
+      "std_importance": 0.0003212837697795748
+    },
+    {
+      "feature": "job.jobParameters.rinoise_option.@attributes.value",
+      "mean_importance": 0.0025264910374096093,
+      "std_importance": 6.83489573151095e-05
+    },
+    {
+      "feature": "job.jobParameters.tinoise_option.@attributes.value",
+      "mean_importance": 0.0016740433437341846,
+      "std_importance": 0.0003546615666450507
+    },
+    {
+      "feature": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "mean_importance": 6.069131129450271e-13,
+      "std_importance": 8.282433084579413e-13
+    }
+  ],
+  "lasso": [
+    {
+      "feature": "job.jobParameters.mc_iterations.@attributes.value",
+      "coefficient": 404.16868645719177
+    },
+    {
+      "feature": "max_rss",
+      "coefficient": 203.33475964323904
+    },
+    {
+      "feature": "job.jobParameters.uniform_grid.@attributes.value",
+      "coefficient": 190.57114652893915
+    },
+    {
+      "feature": "simpoints.0",
+      "coefficient": 98.91971108730803
+    },
+    {
+      "feature": "job.jobParameters.meniscus_points.@attributes.value",
+      "coefficient": 87.07764533273156
+    },
+    {
+      "feature": "edited_scans.0",
+      "coefficient": 75.3633158593901
+    },
+    {
+      "feature": "job.jobParameters.ff0_min.@attributes.value",
+      "coefficient": 45.27509769585399
+    },
+    {
+      "feature": "CPUCount",
+      "coefficient": 31.626536267616277
+    },
+    {
+      "feature": "job.jobParameters.s_grid_points.@attributes.value",
+      "coefficient": 14.348839010364928
+    },
+    {
+      "feature": "job.jobParameters.tinoise_option.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.s_resolution.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.s_min.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.s_max.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.meniscus_range.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.rinoise_option.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "edited_radial_points.0",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.max_iterations.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.ff0_resolution.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.ff0_max.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.ff0_grid_points.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.cluster.@attributes.name",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "wallTime",
+      "coefficient": 0.0
+    }
+  ],
+  "interactions": [
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "max_rss",
+      "interaction_score": 0.6388455918901563
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.meniscus_points.@attributes.value",
+      "interaction_score": 0.605132247085124
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.uniform_grid.@attributes.value",
+      "interaction_score": 0.5401400204145522
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "simpoints.0",
+      "interaction_score": 0.48884918794231375
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.meniscus_points.@attributes.value",
+      "interaction_score": 0.4458320832046955
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.uniform_grid.@attributes.value",
+      "interaction_score": 0.4430490901408351
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "CPUCount",
+      "interaction_score": 0.4324321188319961
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.4256168293518433
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.42127662798885557
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "simpoints.0",
+      "interaction_score": 0.41476235883046164
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.3762483219663599
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "CPUCount",
+      "interaction_score": 0.3580979695062936
+    },
+    {
+      "feature1": "job.jobParameters.uniform_grid.@attributes.value",
+      "feature2": "job.jobParameters.meniscus_points.@attributes.value",
+      "interaction_score": 0.3222252051854855
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.32002856166702626
+    },
+    {
+      "feature1": "job.jobParameters.meniscus_points.@attributes.value",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.3000161080267374
+    },
+    {
+      "feature1": "job.jobParameters.meniscus_points.@attributes.value",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.2890283614768489
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.meniscus_points.@attributes.value",
+      "interaction_score": 0.2848542303109718
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.ff0_min.@attributes.value",
+      "interaction_score": 0.27131721357688443
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.2711940569442855
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.2640871350555898
+    },
+    {
+      "feature1": "job.jobParameters.uniform_grid.@attributes.value",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.25298493830092295
+    },
+    {
+      "feature1": "job.jobParameters.uniform_grid.@attributes.value",
+      "feature2": "simpoints.0",
+      "interaction_score": 0.24849204626159285
+    },
+    {
+      "feature1": "job.jobParameters.ff0_min.@attributes.value",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.24735041440889785
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.ff0_min.@attributes.value",
+      "interaction_score": 0.2418101902879902
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.23966672330205122
+    },
+    {
+      "feature1": "job.jobParameters.uniform_grid.@attributes.value",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.2386290909163753
+    },
+    {
+      "feature1": "job.jobParameters.uniform_grid.@attributes.value",
+      "feature2": "job.jobParameters.ff0_min.@attributes.value",
+      "interaction_score": 0.23524223224232
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.23474868513228203
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "CPUCount",
+      "interaction_score": 0.2316824565698144
+    },
+    {
+      "feature1": "job.jobParameters.meniscus_points.@attributes.value",
+      "feature2": "CPUCount",
+      "interaction_score": 0.22882912583505213
+    },
+    {
+      "feature1": "job.jobParameters.uniform_grid.@attributes.value",
+      "feature2": "CPUCount",
+      "interaction_score": 0.21296566214694812
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.18671975069103616
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.s_grid_points.@attributes.value",
+      "interaction_score": 0.17968261050058296
+    },
+    {
+      "feature1": "job.jobParameters.ff0_min.@attributes.value",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.15463858161249144
+    },
+    {
+      "feature1": "job.jobParameters.meniscus_points.@attributes.value",
+      "feature2": "job.jobParameters.ff0_min.@attributes.value",
+      "interaction_score": 0.15019516214067333
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "CPUCount",
+      "interaction_score": 0.135819748589349
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "job.jobParameters.ff0_min.@attributes.value",
+      "interaction_score": 0.12617354755590585
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.10730755465254999
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.09455955086939533
+    },
+    {
+      "feature1": "job.jobParameters.ff0_min.@attributes.value",
+      "feature2": "CPUCount",
+      "interaction_score": 0.06340590000018641
+    },
+    {
+      "feature1": "job.jobParameters.meniscus_points.@attributes.value",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.059370819902002825
+    },
+    {
+      "feature1": "job.jobParameters.uniform_grid.@attributes.value",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.033531167351795704
+    },
+    {
+      "feature1": "job.jobParameters.s_grid_points.@attributes.value",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.025068269492041422
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "job.jobParameters.tinoise_option.@attributes.value",
+      "interaction_score": 0.024358402231324155
+    },
+    {
+      "feature1": "simpoints.0",
+      "feature2": "job.jobParameters.ff0_min.@attributes.value",
+      "interaction_score": 0.011083464365649316
+    }
+  ]
+}

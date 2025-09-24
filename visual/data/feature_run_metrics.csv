@@ -1,0 +1,7 @@
+Run,z-score 2 max absolute error ,,,,z-score 2.98 absolute error,,,
+,days,hours,minutes,percentage,days,hours,minutes,percentage
+2DSA,,2h,13m,56%,,11h,32m,89%
+2DSA Combined,,11h,38m,68%,,19h,20m,93%
+2DSA Lasso,,17h,50m,77%,1d,8h,,95%
+2DSA Random Forest,1d,2h,,78%,1d,2h,,92%
+2DSA xgBoost,,20h,22m,79%,,20h,24m,93%
