@@ -1,0 +1,22 @@
+{
+    "data_file":"../../datasets/2dsa_cleaned.csv.gz",
+    "method": "2dsa",
+    "feature_space": "raw",
+    "columns_file": "./columns_files/raw_config_columns_2dsa.txt",
+    "architectures": [[64, 32], [128, 64]],
+    "scalers": ["standard", "minmax"],
+    "optimizers": ["adam", "rmsprop"],
+    "batch_sizes": [64, 128],
+    "activations": ["relu", "elu"],
+    "dropout_rates": [0.2, 0.3],
+    "epochs": 100,
+    "patience": 10,
+    "training_fraction": 0.70,
+    "validation_fraction": 0.15,
+    "temporal_split": true,
+    "time_column": "submitTime",
+    "target_variable": "max_rss",
+    "mirroredstrategy": false,
+    "gpu_mem_grow": true,
+    "output_dir": "./results/2dsa/memory/raw/temporal"
+}

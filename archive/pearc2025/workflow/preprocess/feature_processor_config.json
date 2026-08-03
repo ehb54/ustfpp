@@ -1,0 +1,79 @@
+{
+    "input_files": {
+        "source_directory": "./results",
+        "file_patterns": ["2dsa-dataset.csv"],
+        "file_type": "csv"
+    },
+    "output_files": {
+        "directory": "./results/filtered/",
+        "models": {
+            "lasso": {
+                "filename": "2dsa-dataset-filtered-lasso.csv",
+                "metrics_file": "lasso_preprocessing_metrics.csv"
+            },
+            "rf": {
+                "filename": "2dsa-dataset-filtered-rf.csv",
+                "metrics_file": "rf_preprocessing_metrics.csv"
+            },
+            "xgboost": {
+                "filename": "2dsa-dataset-filtered-xgboost.csv",
+                "metrics_file": "xgboost_preprocessing_metrics.csv"
+            }
+        },
+        "metrics_file": "preprocessing_metrics.csv"
+    },
+    "column_configuration": {
+        "model_columns": {
+            "lasso": {
+                "keep_columns": [
+                    "job.jobParameters.meniscus_range.@attributes.value",
+                    "job.jobParameters.ff0_resolution.@attributes.value",
+                    "job.jobParameters.ff0_min.@attributes.value",
+                    "job.jobParameters.uniform_grid.@attributes.value",
+                    "job.jobParameters.meniscus_points.@attributes.value",
+                    "max_rss",
+                    "wallTime",
+                    "CPUTime",
+                    "job.cluster.@attributes.name"
+                ]
+            },
+            "rf": {
+                "keep_columns": [
+                    "job.jobParameters.mc_iterations.@attributes.value",
+                    "edited_scans.0",
+                    "job.jobParameters.s_grid_points.@attributes.value",
+                    "job.jobParameters.uniform_grid.@attributes.value",
+                    "edited_radial_points.0",
+                    "max_rss",
+                    "wallTime",
+                    "CPUTime",
+                    "job.cluster.@attributes.name"
+                ]
+            },
+            "xgboost": {
+                "keep_columns": [
+                    "job.jobParameters.uniform_grid.@attributes.value",
+                    "job.jobParameters.s_grid_points.@attributes.value",
+                    "job.jobParameters.mc_iterations.@attributes.value",
+                    "job.jobParameters.ff0_resolution.@attributes.value",
+                    "simpoints.0",
+                    "max_rss",
+                    "wallTime",
+                    "CPUTime",
+                    "job.cluster.@attributes.name"
+                ]
+            }
+        }
+    },
+    "uniform_columns": {
+        "remove": true,
+        "threshold": 1
+    },
+    "negative_value_handling": {
+        "mode": "all_columns"
+    },
+    "logging": {
+        "log_level": "INFO",
+        "log_file": "2dsa_preprocessing.log"
+    }
+}

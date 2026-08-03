@@ -1,0 +1,4 @@
+Method,BestCluster_MedianStd,WorstCluster_MedianStd,WorstBest_Ratio_Raw,WorstBest_Ratio_Capped
+2dsa,0.577,1503.184,2603.591,2603.591
+ga,5.657,12679.521,2241.444,2241.444
+pcsa,0.0,2151.019,inf,

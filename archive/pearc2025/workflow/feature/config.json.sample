@@ -1,0 +1,13 @@
+{
+  "qual_threshold": 0.15,
+  "quant_threshold": 0.15,
+  "n_stability_iterations": 20,
+  "top_n_interactions": 15,
+  "output_format": "both",
+  "results_dir": "results/feature_analysis",
+  "data_files": {
+    "2DSA": "../preprocess/results/filtered/2dsa-filtered.csv",
+    "GA": "../preprocess/results/filtered/ga-filtered.csv",
+    "PCSA": "../preprocess/results/filtered/pcsa-filtered.csv"
+  }
+}
