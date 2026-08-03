@@ -1,0 +1,4 @@
+Method,Jobs,Distinct_Configs,Reused_Configs_ge2,Clusters,Median_BetweenWithin_Ratio,WorstBest_Ratio_Capped,Median_Temporal_Drift,Top_Unstable_Score
+2dsa,283412,111265,15469,33,2.087,2603.591,,1.132
+ga,15581,13562,1451,32,0.992,2241.444,,1.884
+pcsa,42536,6933,1029,24,1.143,,,0.387

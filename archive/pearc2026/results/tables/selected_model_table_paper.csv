@@ -1,0 +1,13 @@
+method,target,split_mode,model_id
+2DSA,CPUTime,Record-order,128x64_minmax_rmsprop_bs64_relu_do0.3
+2DSA,CPUTime,Temporal-order,64x32_std_adam_bs64_elu_do0.2
+2DSA,max_rss,Record-order,128x64_std_adam_bs64_elu_do0.2
+2DSA,max_rss,Temporal-order,128x64_std_rmsprop_bs128_elu_do0.2
+GA,CPUTime,Record-order,64x32_std_adam_bs64_relu_do0.3
+GA,CPUTime,Temporal-order,128x64_std_adam_bs128_relu_do0.2
+GA,max_rss,Record-order,128x64_minmax_adam_bs128_elu_do0.3
+GA,max_rss,Temporal-order,128x64_std_adam_bs64_relu_do0.2
+PCSA,CPUTime,Record-order,128x64_minmax_rmsprop_bs128_relu_do0.3
+PCSA,CPUTime,Temporal-order,128x64_minmax_adam_bs64_relu_do0.2
+PCSA,max_rss,Record-order,64x32_std_rmsprop_bs64_elu_do0.2
+PCSA,max_rss,Temporal-order,64x32_std_rmsprop_bs128_relu_do0.2

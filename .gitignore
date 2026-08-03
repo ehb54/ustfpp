@@ -1,10 +1,9 @@
-#*
 *~
 /.idea/
 /venv/
-config*json
-hyperparameter_architecture_analysis4.py
+/.venv/
 *#
 .#*
-test*py
 
+*.DS_Store
+/data/
