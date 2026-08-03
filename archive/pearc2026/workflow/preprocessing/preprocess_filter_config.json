@@ -1,0 +1,73 @@
+{
+    "input_files": {
+        "source_directory": "./results/extracted",
+        "file_patterns": [
+            "2dsa_dataset.csv",
+            "ga_dataset.csv",
+            "pcsa_dataset.csv"
+        ],
+        "file_type": "csv"
+    },
+    "additional_filters": {
+       "min_value_filters": {
+          "wallTime": 1,
+          "CPUTime": 1,
+          "max_rss": 1
+        }
+    },
+    "output_files": {
+        "directory": "./results/cleaned/",
+        "prefix": "cleaned_",
+        "suffix": ".csv",
+        "metrics_file": "preprocessing_metrics.csv",
+        "models": {
+            "2dsa": {
+                "filename": "2dsa_cleaned.csv",
+                "metrics_file": "2dsa_metrics.csv"
+            },
+            "ga": {
+                "filename": "ga_cleaned.csv",
+                "metrics_file": "ga_metrics.csv"
+            },
+            "pcsa": {
+                "filename": "pcsa_cleaned.csv",
+                "metrics_file": "pcsa_metrics.csv"
+            }
+        }
+    },
+    "column_configuration": {
+        "model_columns": {
+            "2dsa": {
+                "keep_columns": [],
+                "negative_value_handling": {
+                    "mode": "all_columns"
+                }
+            },
+            "ga": {
+                "keep_columns": [],
+                "negative_value_handling": {
+                    "mode": "all_columns"
+                }
+            },
+            "pcsa": {
+                "keep_columns": [],
+                "drop_columns": ["job.jobParameters.s_max.@attributes.value", "job.jobParameters.s_min.@attributes.value"],
+                "negative_value_handling": {
+                  "mode": "specific_columns",
+                  "columns": ["wallTime", "CPUTime", "max_rss"]
+                }
+            }
+        }
+    },
+    "uniform_columns": {
+        "remove": true,
+        "threshold": 1
+    },
+    "negative_value_handling": {
+        "mode": "disabled"
+    },
+    "logging": {
+        "log_level": "INFO",
+        "log_file": "2dsa_preprocessing.log"
+    }
+}

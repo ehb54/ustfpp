@@ -1,0 +1,38 @@
+{
+  "data_file": "../preprocess/results/filtered/transformed/2dsa-dataset-filtered.csv",
+  "n_iterations": 150,
+  "test_size": 0.4,
+  "output_dir": "results/monte_carlo",
+  "ignore_features": ["max_rss", "wallTime"],
+  "lasso_params": {
+    "alpha": 0.01,
+    "max_iter": 2000,
+    "random_state": 42,
+    "selection": "random",
+    "tol": 1e-4,
+    "fit_intercept": true
+  },
+  "xgboost_params": {
+    "max_depth": 8,
+    "learning_rate": 0.05,
+    "n_estimators": 200,
+    "objective": "reg:squarederror",
+    "verbosity": 0,
+    "random_state": 42,
+    "early_stopping_rounds": 20,
+    "eval_metric": "rmse",
+    "subsample": 0.8,
+    "colsample_bytree": 0.8
+  },
+  "rf_params": {
+    "n_estimators": 200,
+    "max_depth": null,
+    "min_samples_split": 5,
+    "min_samples_leaf": 3,
+    "random_state": 42,
+    "n_jobs": -1,
+    "max_features": "sqrt",
+    "bootstrap": true,
+    "oob_score": true
+  }
+}

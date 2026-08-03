@@ -1,0 +1,569 @@
+{
+  "qualitative": {
+    "wallTime": {
+      "mutual_information": 2.335978496130439,
+      "entropy": 13.768616718134377,
+      "unique_values": 13970
+    }
+  },
+  "quantitative": {
+    "correlations": {
+      "CPUCount": 0.053217211676201095,
+      "edited_radial_points.0": 0.10792788012204248,
+      "edited_scans.0": 0.27866214203071643,
+      "job.cluster.@attributes.name": 0.10289863329575111,
+      "job.jobParameters.bucket_fixed.@attributes.fixedtype": 0.01879447183354059,
+      "job.jobParameters.bucket_fixed.@attributes.value": 0.00496925840042411,
+      "job.jobParameters.bucket_fixed.@attributes.xtype": 0.03630752275262576,
+      "job.jobParameters.bucket_fixed.@attributes.ytype": 0.023933111981002037,
+      "job.jobParameters.conc_threshold.@attributes.value": 0.003330114689970839,
+      "job.jobParameters.demes.@attributes.value": 0.10500802997566419,
+      "job.jobParameters.generations.@attributes.value": 0.004756936921777032,
+      "job.jobParameters.k_grid.@attributes.value": 0.005011191613809933,
+      "job.jobParameters.mc_iterations.@attributes.value": 0.27838278269552874,
+      "job.jobParameters.migration.@attributes.value": 0.0037343199180263297,
+      "job.jobParameters.mutate_sigma.@attributes.value": 0.08470822783014266,
+      "job.jobParameters.p_mutate_k.@attributes.value": 0.012431808402606348,
+      "job.jobParameters.p_mutate_s.@attributes.value": 0.012431808402606348,
+      "job.jobParameters.p_mutate_sk.@attributes.value": 0.012431808402606348,
+      "job.jobParameters.plague.@attributes.value": 0.002683914167823656,
+      "job.jobParameters.population.@attributes.value": 0.0854177142682533,
+      "job.jobParameters.regularization.@attributes.value": 0.0013282502445454308,
+      "job.jobParameters.req_mgroupcount.@attributes.value": 0.08147659001381954,
+      "job.jobParameters.s_grid.@attributes.value": 0.007688380737612931,
+      "job.jobParameters.seed.@attributes.value": 9.403539624133368e-05,
+      "simpoints.0": 0.00809260184700391,
+      "max_rss": 0.15623691089358718
+    },
+    "mutual_information": {
+      "CPUCount": 0.10592488891867813,
+      "edited_radial_points.0": 0.07515931742707416,
+      "edited_scans.0": 0.21472095690681936,
+      "job.cluster.@attributes.name": 0.11222884974734004,
+      "job.jobParameters.bucket_fixed.@attributes.fixedtype": 0.022203511486736494,
+      "job.jobParameters.bucket_fixed.@attributes.value": 0.015591431404266665,
+      "job.jobParameters.bucket_fixed.@attributes.xtype": 0.022340867181439572,
+      "job.jobParameters.bucket_fixed.@attributes.ytype": 0.021547758114228266,
+      "job.jobParameters.conc_threshold.@attributes.value": 0.0,
+      "job.jobParameters.demes.@attributes.value": 0.019780018946575995,
+      "job.jobParameters.generations.@attributes.value": 0.0009391631902768705,
+      "job.jobParameters.k_grid.@attributes.value": 0.0024830913077142913,
+      "job.jobParameters.mc_iterations.@attributes.value": 0.1077828090545685,
+      "job.jobParameters.migration.@attributes.value": 0.00035402781301696606,
+      "job.jobParameters.mutate_sigma.@attributes.value": 0.02412232469833131,
+      "job.jobParameters.p_mutate_k.@attributes.value": 0.0,
+      "job.jobParameters.p_mutate_s.@attributes.value": 0.0,
+      "job.jobParameters.p_mutate_sk.@attributes.value": 0.0,
+      "job.jobParameters.plague.@attributes.value": 0.0,
+      "job.jobParameters.population.@attributes.value": 0.02476483661609219,
+      "job.jobParameters.regularization.@attributes.value": 0.001180233544325171,
+      "job.jobParameters.req_mgroupcount.@attributes.value": 0.06163625844119225,
+      "job.jobParameters.s_grid.@attributes.value": 0.00159105501720469,
+      "job.jobParameters.seed.@attributes.value": 0.0014096624271637825,
+      "simpoints.0": 0.00041343193747844786,
+      "max_rss": 0.46139184440001024
+    },
+    "f_scores": {
+      "CPUCount": 39.77297084865644,
+      "edited_radial_points.0": 165.04711534155345,
+      "edited_scans.0": 1178.9992029875343,
+      "job.cluster.@attributes.name": 149.86292271094223,
+      "job.jobParameters.bucket_fixed.@attributes.fixedtype": 4.948411267765229,
+      "job.jobParameters.bucket_fixed.@attributes.value": 0.3458167202540264,
+      "job.jobParameters.bucket_fixed.@attributes.xtype": 18.48494738984052,
+      "job.jobParameters.bucket_fixed.@attributes.ytype": 8.026002307484559,
+      "job.jobParameters.conc_threshold.@attributes.value": 0.15530137477243383,
+      "job.jobParameters.demes.@attributes.value": 156.13941614680206,
+      "job.jobParameters.generations.@attributes.value": 0.31689596893596494,
+      "job.jobParameters.k_grid.@attributes.value": 0.35167785897459714,
+      "job.jobParameters.mc_iterations.@attributes.value": 1176.4380048350051,
+      "job.jobParameters.migration.@attributes.value": 0.19529053743381306,
+      "job.jobParameters.mutate_sigma.@attributes.value": 101.21171906196244,
+      "job.jobParameters.p_mutate_k.@attributes.value": 2.164650788148768,
+      "job.jobParameters.p_mutate_s.@attributes.value": 2.164650788148768,
+      "job.jobParameters.p_mutate_sk.@attributes.value": 2.164650788148768,
+      "job.jobParameters.plague.@attributes.value": 0.10087707388366335,
+      "job.jobParameters.population.@attributes.value": 102.92676027319833,
+      "job.jobParameters.regularization.@attributes.value": 0.024706582553315592,
+      "job.jobParameters.req_mgroupcount.@attributes.value": 93.58590373548925,
+      "job.jobParameters.s_grid.@attributes.value": 0.8278421566604814,
+      "job.jobParameters.seed.@attributes.value": 0.00012383255216569955,
+      "simpoints.0": 0.9171848926094872,
+      "max_rss": 350.3902692221543
+    }
+  },
+  "stability": [
+    {
+      "feature": "CPUCount",
+      "mean_importance": 0.3878933323205752,
+      "std_importance": 0.0018017384882234287
+    },
+    {
+      "feature": "max_rss",
+      "mean_importance": 0.35262872404659235,
+      "std_importance": 0.0022165273843729465
+    },
+    {
+      "feature": "wallTime",
+      "mean_importance": 0.11601910399404584,
+      "std_importance": 0.0020447288189092273
+    },
+    {
+      "feature": "edited_scans.0",
+      "mean_importance": 0.06081539226038822,
+      "std_importance": 0.0015152722455145983
+    },
+    {
+      "feature": "edited_radial_points.0",
+      "mean_importance": 0.03568099715920209,
+      "std_importance": 0.0020029430000863685
+    },
+    {
+      "feature": "job.cluster.@attributes.name",
+      "mean_importance": 0.03138473618817801,
+      "std_importance": 0.0006291641524523438
+    },
+    {
+      "feature": "job.jobParameters.mc_iterations.@attributes.value",
+      "mean_importance": 0.007589612683303768,
+      "std_importance": 0.00028955022360505165
+    },
+    {
+      "feature": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "mean_importance": 0.005613190111713955,
+      "std_importance": 0.00042709885388042036
+    },
+    {
+      "feature": "job.jobParameters.population.@attributes.value",
+      "mean_importance": 0.000639321260051067,
+      "std_importance": 5.372487384395945e-05
+    },
+    {
+      "feature": "job.jobParameters.mutate_sigma.@attributes.value",
+      "mean_importance": 0.0006325726275402319,
+      "std_importance": 5.95762099254943e-05
+    },
+    {
+      "feature": "job.jobParameters.demes.@attributes.value",
+      "mean_importance": 0.0004059101244300074,
+      "std_importance": 4.441263286877752e-05
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "mean_importance": 0.0001890262871235843,
+      "std_importance": 2.519201396900734e-05
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.xtype",
+      "mean_importance": 0.00012299510476620335,
+      "std_importance": 1.4903387731753574e-05
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.fixedtype",
+      "mean_importance": 7.370693829959337e-05,
+      "std_importance": 1.5151253399786378e-05
+    },
+    {
+      "feature": "simpoints.0",
+      "mean_importance": 5.768610176567122e-05,
+      "std_importance": 7.752406949725528e-06
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.value",
+      "mean_importance": 5.4708148910951073e-05,
+      "std_importance": 9.164137340829416e-06
+    },
+    {
+      "feature": "job.jobParameters.migration.@attributes.value",
+      "mean_importance": 4.8178261425932075e-05,
+      "std_importance": 8.219477306633635e-06
+    },
+    {
+      "feature": "job.jobParameters.regularization.@attributes.value",
+      "mean_importance": 4.06318751125995e-05,
+      "std_importance": 1.2793956325905174e-05
+    },
+    {
+      "feature": "job.jobParameters.plague.@attributes.value",
+      "mean_importance": 2.2357547453825904e-05,
+      "std_importance": 6.2674851551042945e-06
+    },
+    {
+      "feature": "job.jobParameters.p_mutate_s.@attributes.value",
+      "mean_importance": 2.028973535756054e-05,
+      "std_importance": 8.540933512677977e-06
+    },
+    {
+      "feature": "job.jobParameters.p_mutate_k.@attributes.value",
+      "mean_importance": 1.9629407796534294e-05,
+      "std_importance": 3.6194724519927797e-06
+    },
+    {
+      "feature": "job.jobParameters.p_mutate_sk.@attributes.value",
+      "mean_importance": 1.898062933745716e-05,
+      "std_importance": 9.729603355117378e-06
+    },
+    {
+      "feature": "job.jobParameters.s_grid.@attributes.value",
+      "mean_importance": 1.6158170812405788e-05,
+      "std_importance": 5.05818308952292e-06
+    },
+    {
+      "feature": "job.jobParameters.k_grid.@attributes.value",
+      "mean_importance": 1.2599465745682443e-05,
+      "std_importance": 4.0470158971037445e-06
+    },
+    {
+      "feature": "job.jobParameters.conc_threshold.@attributes.value",
+      "mean_importance": 9.752698352855294e-08,
+      "std_importance": 4.6650879655596715e-08
+    },
+    {
+      "feature": "job.jobParameters.seed.@attributes.value",
+      "mean_importance": 4.603762284491706e-08,
+      "std_importance": 8.215532031048032e-08
+    },
+    {
+      "feature": "job.jobParameters.generations.@attributes.value",
+      "mean_importance": 1.5985464937635852e-08,
+      "std_importance": 1.3752906719751244e-08
+    }
+  ],
+  "lasso": [
+    {
+      "feature": "CPUCount",
+      "coefficient": 15754.020995291521
+    },
+    {
+      "feature": "job.jobParameters.mc_iterations.@attributes.value",
+      "coefficient": 8849.97132286144
+    },
+    {
+      "feature": "max_rss",
+      "coefficient": 8364.813720894525
+    },
+    {
+      "feature": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "coefficient": 5158.341290959219
+    },
+    {
+      "feature": "edited_scans.0",
+      "coefficient": 5153.6384095914045
+    },
+    {
+      "feature": "edited_radial_points.0",
+      "coefficient": 2444.4743472023665
+    },
+    {
+      "feature": "job.jobParameters.population.@attributes.value",
+      "coefficient": 1213.094810296464
+    },
+    {
+      "feature": "job.jobParameters.demes.@attributes.value",
+      "coefficient": 1103.2121335639608
+    },
+    {
+      "feature": "job.cluster.@attributes.name",
+      "coefficient": 679.6715430793464
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "coefficient": 416.40661565850206
+    },
+    {
+      "feature": "wallTime",
+      "coefficient": 374.2164710947893
+    },
+    {
+      "feature": "job.jobParameters.p_mutate_k.@attributes.value",
+      "coefficient": 215.80110140887658
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.fixedtype",
+      "coefficient": 108.74950426812855
+    },
+    {
+      "feature": "simpoints.0",
+      "coefficient": 101.26316749899962
+    },
+    {
+      "feature": "job.jobParameters.migration.@attributes.value",
+      "coefficient": 24.845113136373
+    },
+    {
+      "feature": "job.jobParameters.k_grid.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.generations.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.conc_threshold.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.mutate_sigma.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.p_mutate_s.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.p_mutate_sk.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.plague.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.xtype",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.regularization.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.bucket_fixed.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.s_grid.@attributes.value",
+      "coefficient": 0.0
+    },
+    {
+      "feature": "job.jobParameters.seed.@attributes.value",
+      "coefficient": 0.0
+    }
+  ],
+  "interactions": [
+    {
+      "feature1": "max_rss",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.5586867080868624
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.population.@attributes.value",
+      "interaction_score": 0.5532098320354205
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "edited_radial_points.0",
+      "interaction_score": 0.5314737515635417
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.5314394971551475
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "max_rss",
+      "interaction_score": 0.5292759727706411
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.4802169246234621
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "interaction_score": 0.4714459767746776
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.44041255894920867
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "max_rss",
+      "interaction_score": 0.4208190813307637
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "edited_radial_points.0",
+      "interaction_score": 0.4102884176955782
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "job.jobParameters.population.@attributes.value",
+      "interaction_score": 0.4098998797076382
+    },
+    {
+      "feature1": "max_rss",
+      "feature2": "job.jobParameters.demes.@attributes.value",
+      "interaction_score": 0.405754164357997
+    },
+    {
+      "feature1": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.38888303262329604
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.population.@attributes.value",
+      "interaction_score": 0.3802441596755713
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.3580130945889866
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.34409725618546644
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "edited_radial_points.0",
+      "interaction_score": 0.342997812690842
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "edited_scans.0",
+      "interaction_score": 0.3373232478926146
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "interaction_score": 0.2800806415922913
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.jobParameters.demes.@attributes.value",
+      "interaction_score": 0.2729577891357415
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.25889072166697713
+    },
+    {
+      "feature1": "job.jobParameters.mc_iterations.@attributes.value",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.2548574277037119
+    },
+    {
+      "feature1": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "feature2": "job.jobParameters.population.@attributes.value",
+      "interaction_score": 0.24037827583448065
+    },
+    {
+      "feature1": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "feature2": "edited_radial_points.0",
+      "interaction_score": 0.23454610245626198
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.mc_iterations.@attributes.value",
+      "interaction_score": 0.228863843445252
+    },
+    {
+      "feature1": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.20370846346376992
+    },
+    {
+      "feature1": "edited_radial_points.0",
+      "feature2": "job.jobParameters.population.@attributes.value",
+      "interaction_score": 0.18056819898232332
+    },
+    {
+      "feature1": "edited_scans.0",
+      "feature2": "job.jobParameters.demes.@attributes.value",
+      "interaction_score": 0.17746702882774923
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "interaction_score": 0.16909232046662795
+    },
+    {
+      "feature1": "job.jobParameters.population.@attributes.value",
+      "feature2": "job.jobParameters.demes.@attributes.value",
+      "interaction_score": 0.1422704594573616
+    },
+    {
+      "feature1": "job.jobParameters.demes.@attributes.value",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.13693686470702113
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.population.@attributes.value",
+      "interaction_score": 0.13126480535327018
+    },
+    {
+      "feature1": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.1220424558686185
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "edited_radial_points.0",
+      "interaction_score": 0.12073455866729413
+    },
+    {
+      "feature1": "job.jobParameters.demes.@attributes.value",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.10129313701451564
+    },
+    {
+      "feature1": "edited_radial_points.0",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.10063451365780876
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.09679596573751105
+    },
+    {
+      "feature1": "job.jobParameters.population.@attributes.value",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.07600820887591508
+    },
+    {
+      "feature1": "job.cluster.@attributes.name",
+      "feature2": "job.jobParameters.bucket_fixed.@attributes.ytype",
+      "interaction_score": 0.06309901770915283
+    },
+    {
+      "feature1": "job.jobParameters.req_mgroupcount.@attributes.value",
+      "feature2": "job.jobParameters.demes.@attributes.value",
+      "interaction_score": 0.04601461360179836
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.03525383322447676
+    },
+    {
+      "feature1": "job.jobParameters.population.@attributes.value",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.033660091796230085
+    },
+    {
+      "feature1": "edited_radial_points.0",
+      "feature2": "job.cluster.@attributes.name",
+      "interaction_score": 0.03105077472544469
+    },
+    {
+      "feature1": "edited_radial_points.0",
+      "feature2": "job.jobParameters.demes.@attributes.value",
+      "interaction_score": 0.02381760034452604
+    },
+    {
+      "feature1": "CPUCount",
+      "feature2": "job.jobParameters.demes.@attributes.value",
+      "interaction_score": 0.011562605864070385
+    }
+  ]
+}
